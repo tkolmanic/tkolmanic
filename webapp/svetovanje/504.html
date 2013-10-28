@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>
+504
+</title>
+   <meta charset='utf-8'>
+    <link href="../css/moidom_iframe.css" rel="stylesheet">
+    <script charset="UTF-8" src="../js/jquery.min.js"></script>
+    <script charset="UTF-8" src="../common.js"></script>
+    <script charset="UTF-8" src="../iframe.js"></script>
+<script>
+var NODE_ID = 'node504';
+</script>
+</head>
+<body onload="updateButtonsWithImages()">
+<h1 id="title">
+Ločevanje odpadkov.
+</h1>
+<p id="text1">
+Ločevanje odpadkov je povezano z pravilnim razvrščanjem odpadkov v posamezne zabojnike. Ker plačujemo samo za mešane odpadke, je smiselno le-te zmanjšati, kolikor je mogoče, z ločevanjem. Preverite, v kateri zabojnik je potrebno dati posamezne odpadke.
+</p>
+<p id="text2">
+Izberite možnost.
+</p>
+<table class="selectNext">
+<tr onClick="selectNext(NODE_ID,'radio=radio19', '505.html')"><td>Črni zabojnik.</td><td class="next">&gt;</td></tr>
+<tr onClick="selectNext(NODE_ID,'radio=radio20', '506.html')"><td>Rdeči zabojnik.</td><td class="next">&gt;</td></tr>
+<tr onClick="selectNext(NODE_ID,'radio=radio21', '507.html')"><td>Beli zabojnik.</td><td class="next">&gt;</td></tr>
+<tr onClick="selectNext(NODE_ID,'radio=radio22', '508.html')"><td>Rumeni zabojnik.</td><td class="next">&gt;</td></tr>
+<tr onClick="selectNext(NODE_ID,'radio=radio23', '509.html')"><td>Rjavi zabojnik.</td><td class="next">&gt;</td></tr>
+</table>
+	<span>
+        <button class="withImage" onclick="setPage('start.html')" id="nextButton">
+            <img class="withImage" src="../img/backSvetovanje.svg" alt="&lt; Svetovanje" />
+        </button>
+    </span>
+	<div id="progressBar" style="display:none">
+       <div class="progressText">
+           Prenašam podatke ...
+       </div>
+    </div>
+</body>
+</html>

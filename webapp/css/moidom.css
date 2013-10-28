@@ -1,0 +1,346 @@
+body, html {
+    height: 100%;
+    padding: 0;
+}
+#mainHeader {
+    background: url(../img/mainHead.png) left top repeat-x #a4c032;
+    padding: 3px 10px;
+    box-shadow: 0 2px 0 rgba(0,0,0,.3);
+    position: fixed;
+    left: 0;
+    top: 0;
+    right:0;
+    z-index: 2;
+    height: 34px;
+}
+
+a {
+    color: #6ea100;
+}
+a:hover {
+    color: #6ea100;
+}
+
+.mainWrap {
+    min-height: 100%;
+    position: relative;
+}
+.mainContent {
+    padding: 50px 20px;
+    margin: 0;
+}
+.appLogo {
+    display: inline-block;
+    width: 146px;
+    height: 36px;
+    background:url(../img/logo.png);
+}
+@media (max-width: 800px) {
+    .mainNav > li > a span { display: none; }
+    .mainNav > li > a img { margin: 0 !important; }
+}
+@media (max-width: 480px) {
+    a.appLogo {
+        background:url(../img/logo_small.png);
+        width: 46px;
+    }
+}
+@media (max-width: 380px) {
+    #mainHeader {
+        padding-bottom: 40px;
+    }
+    #mainTabs {
+        left: 60px;
+        text-align: right;
+    }
+    .mainNav > li {
+        float: none;
+        display: inline-block;
+    }
+    .subMenu {
+        margin-top: 45px;
+    }
+    .tab-content {
+        margin-top: 45px;  
+    }
+    .subMenuContent {
+        margin-top: 75px;  
+    }
+    .welcome {
+        padding-top: 30px;
+    }
+}
+
+
+.welcome {
+    width: 38%;
+    margin: 10px 5%;
+    float: left;
+}
+.btn-primary {
+    background: url(../img/mainHead.png) left center repeat-x #a4c032;
+    border-color: #97b12b;
+}
+.mainNav {
+    position: fixed;
+    z-index: 3;
+    right:15px;
+    top: 5px;
+    border: none;
+}
+.mainNav > li > a,
+.mainNav > .active > a, .mainNav > .active > a:hover {
+    border: none;
+    border-radius: 10px;
+    padding: 4px 8px;
+    color: #fff;
+    text-shadow: 0 1px 0 #333;
+}
+.mainNav > li > a:hover {
+    background: #88a02a;
+}
+.mainNav > .active > a, .mainNav > .active > a:hover {
+    background: #88a02a;
+}
+.mainNav > li > a img {
+    margin-right: 6px;
+}
+
+.subMenu {
+    position: fixed;
+    left: 0;
+    right:0;
+    top: 40px;
+    padding: 5px 10px 0;
+    background: url(../img/submenu.png) left bottom repeat-x;
+    border: none;
+}
+.subMenu > li {
+    margin-right: 6px;
+    margin-bottom: 0;
+}
+.subMenu > li > a {
+    padding: 5px 8px;
+    color: #666;
+    text-shadow: 0 1px 0 #fff;
+}
+.subMenu > li > a:hover {
+    background: #fff;
+    border-color: transparent;
+}
+.subMenuContent {
+    margin-top: 38px;
+}
+@media (max-width: 600px) {
+    .welcome, .loginForm { width: 90%; float: none; margin: 10px 0; }
+}
+
+#appFooter {
+    background: url(../img/footer.png) left top repeat-x #F8F8F8;
+    padding: 5px 10px;
+    color: #000;
+    font-size: 11px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    clear: both;
+}
+#appFooter .center {
+    min-height: 40px;
+}
+#appFooter .center > span {
+    margin-top: 10px;
+    float: left;
+}
+#appFooter .socialIcons {
+    position: absolute;
+    right: 10px;
+    bottom: 25px;
+}
+@media(max-width: 800px) {
+    #appFooter .socialIcons {
+        position: static;
+    }
+    #appFooter .center > span {
+        display: block;
+        float: none;
+    }
+    .mainContent {
+        padding-bottom: 70px;
+    }
+}
+.withPartners {
+    padding-bottom: 120px;
+}
+@media(max-width: 850px) {
+    .withPartners {
+        padding-bottom: 20px;
+    }
+    #appFooter {
+        position: static !important; 
+    }
+}
+#appFooter .socialIcons > * {
+    display: inline-block;
+    vertical-align: middle;
+}
+#appFooter .socialIcons > a {
+    width: 30px;
+    height: 30px;
+    background: url(../img/facebook.png) left top;
+    background-position: left bottom;
+}
+#appFooter .socialIcons > a:hover {
+    /*background-position: left bottom; always enabled after setting white background */
+}
+#appFooter .socialIcons > a.twitter {
+    background-image: url(../img/twitter.png);
+}
+
+/* OCR plugin canvas and buttons
+-------------------------------------------------- */
+
+#canvas {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+.canvas-btn {
+    width:49.6%;
+}
+
+/* Mini layout previews
+-------------------------------------------------- */
+.mini-layout {
+  border: 1px solid #ddd;
+  -webkit-border-radius: 6px;
+     -moz-border-radius: 6px;
+          border-radius: 6px;
+  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.075);
+     -moz-box-shadow: 0 1px 2px rgba(0,0,0,.075);
+          box-shadow: 0 1px 2px rgba(0,0,0,.075);
+}
+.mini-layout,
+.mini-layout .mini-layout-body,
+.mini-layout.fluid .mini-layout-sidebar {
+  height: 300px;
+}
+.mini-layout {
+  margin-bottom: 20px;
+  padding: 9px;
+}
+.mini-layout div {
+  -webkit-border-radius: 3px;
+     -moz-border-radius: 3px;
+          border-radius: 3px;
+}
+.mini-layout .mini-layout-body {
+  background-color: #dceaf4;
+  margin: 0 auto;
+  width: 70%;
+}
+.mini-layout.fluid .mini-layout-sidebar,
+.mini-layout.fluid .mini-layout-header,
+.mini-layout.fluid .mini-layout-body {
+  float: left;
+}
+.mini-layout.fluid .mini-layout-sidebar {
+  background-color: #bbd8e9;
+  width: 20%;
+}
+.mini-layout.fluid .mini-layout-body {
+  width: 77.5%;
+  margin-left: 2.5%;
+}
+
+a.mobileIcon {
+    display: inline-block;
+    padding:8px;
+    border-radius: 5px;
+    background: #ffffff;
+    background: -moz-linear-gradient(top, #ffffff 0%, #efefef 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#efefef));
+    background: -webkit-linear-gradient(top, #ffffff 0%,#efefef 100%);
+    background: -o-linear-gradient(top, #ffffff 0%,#efefef 100%);
+    background: -ms-linear-gradient(top, #ffffff 0%,#efefef 100%);
+    background: linear-gradient(to bottom, #ffffff 0%,#efefef 100%);
+    box-shadow:inset 0 1px rgba(255,255,255,.3),inset 0 -3px 2px rgba(0,0,0,0.20);
+    margin:5px;
+    border:1px solid #efefef;
+}
+
+a.mobileIcon:hover{
+    background: #fff;
+    cursor: pointer;
+}
+
+a.mobileIcon:active{
+   top:3px;
+    box-shadow: inset 0px 2px 3px #bebebe, 0px 0px 0px 0px #bebebe, 0px 0px 1px #bebebe;
+    border:1px solid #d0d0d0;
+}
+.noSpacing {
+    padding: 0px 0px;
+    padding-bottom: 0px;
+    margin: 0;
+}
+.margin5 {
+    margin: 5px;
+}
+.margin20 {
+    margin: 20px;
+}
+.noBorder {
+	border: none;
+}
+.buttonMobile {
+    display: inline-block !important;
+}
+.centered {
+    text-align: center;	
+}
+.mobileCentered {
+	/* by default, nothing; on mobile, centered */
+}
+.mobileLeftAligned {
+    /* by default, nothing; on mobile, centered */
+}
+.leftAligned {
+    text-align: left; 
+}
+.webOnly {
+	 /* shown in the web page and not shown in the mobile application */
+	 display:inherit;
+}
+.mobileOnly {
+     /* shown in the mobile application and not shown in the web page */
+     display:none;
+}
+.clickable {
+    cursor: pointer;
+    background: white;
+}
+button.withImage {
+    padding: 0px 0px;
+    background: none;
+    box-shadow: none;
+    border: none;
+}
+img.withImage {
+    /* currently empty, the style is used to find such images easily */
+}
+ul.assignedSettingList {
+    /* lists of currently assigned commodities or tags */
+    list-style: none;
+    border: 1px solid rgb(204, 204, 204);
+    border-radius: 10px 10px 10px 10px;
+    margin: 0px 0px 0px 0px;
+    background: white;
+}
+ul.assignedSettingList li {
+    /* list items of currently assigned commodities or tags */
+    list-style: none;
+    margin: 10px 10px 10px 10px;
+    background: white;
+}

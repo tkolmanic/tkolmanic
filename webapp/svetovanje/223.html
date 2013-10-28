@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>
+223
+</title>
+   <meta charset='utf-8'>
+    <link href="../css/moidom_iframe.css" rel="stylesheet">
+    <script charset="UTF-8" src="../js/jquery.min.js"></script>
+    <script charset="UTF-8" src="../common.js"></script>
+    <script charset="UTF-8" src="../iframe.js"></script>
+<script>
+var NODE_ID = 'node223';
+</script>
+</head>
+<body onload="updateButtonsWithImages()">
+<h1 id="title">
+Stanje ovoja stavbe
+</h1>
+<p id="text1">
+Stene za relativno učinkovito stavbo morajo imeti najmanj 10 do 12 cm debelo izolacijo. Podstrešje pa najmanj 20 do 25 cm. Izolacija mora pokrivati čim večji del ovoja, ker je le tako možno zagotoviti dobre toplotne lastnosti stavbe. Če primerjate svojo stavbo z zgoraj napisanimi trditvami, lahko ugotovite sledeče:
+</p>
+<p id="text2">
+Izberite možnost.
+</p>
+<table class="selectNext">
+<tr onClick="selectNext(NODE_ID,'radio=radio125', '225.html')"><td>Imam dobro izoliran ovoj stavbe in nimam potrebe po dodatnih ukrepih.</td><td class="next">&gt;</td></tr>
+<tr onClick="selectNext(NODE_ID,'radio=radio126', '226.html')"><td>Moj ovoj stavbe ni izoliran ali je pomanjkljivo izoliran.</td><td class="next">&gt;</td></tr>
+</table>
+	<span>
+        <button class="withImage" onclick="setPage('start.html')" id="nextButton">
+            <img class="withImage" src="../img/backSvetovanje.svg" alt="&lt; Svetovanje" />
+        </button>
+    </span>
+	<div id="progressBar" style="display:none">
+       <div class="progressText">
+           Prenašam podatke ...
+       </div>
+    </div>
+</body>
+</html>

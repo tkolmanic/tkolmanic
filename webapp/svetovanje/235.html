@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>
+235
+</title>
+   <meta charset='utf-8'>
+    <link href="../css/moidom_iframe.css" rel="stylesheet">
+    <script charset="UTF-8" src="../js/jquery.min.js"></script>
+    <script charset="UTF-8" src="../common.js"></script>
+    <script charset="UTF-8" src="../iframe.js"></script>
+<script>
+var NODE_ID = 'node235';
+</script>
+</head>
+<body onload="updateButtonsWithImages()">
+<h1 id="title">
+Toplotne črpalke
+</h1>
+<p id="text1">
+Toplotne črpalke spadajo med novejše načine ogrevanja. Za pogon uporabljajo električno energijo, s pomočjo katere črpajo toploto iz različnih medijev. Splošna značilnost toplotnih črpalk je, da se bolje obnesejo v kombinaciji z talnim ogrevanjem, saj je temperaturna razlika med virom in ponorom energije manjša kot pri uporabi radiatorjev in zato je učinkovitost sistema boljša. Glede na to, iz katerega medija črpajo energijo, se toplotne črpalke nato delijo na sledeče glavne tipe. Izberite posamezni tip in preverite, katera toplotna črpalka bi bila najustreznejša za ogrevanje vašega objekta.
+</p>
+<p id="text2">
+Izberite možnost.
+</p>
+<table class="selectNext">
+<tr onClick="selectNext(NODE_ID,'radio=radio185', '236.html')"><td>Zrak-zrak</td><td class="next">&gt;</td></tr>
+<tr onClick="selectNext(NODE_ID,'radio=radio186', '237.html')"><td>Zrak-voda</td><td class="next">&gt;</td></tr>
+<tr onClick="selectNext(NODE_ID,'radio=radio187', '238.html')"><td>Voda voda</td><td class="next">&gt;</td></tr>
+<tr onClick="selectNext(NODE_ID,'radio=radio188', '239.html')"><td>Zemlja-voda</td><td class="next">&gt;</td></tr>
+</table>
+	<span>
+        <button class="withImage" onclick="setPage('start.html')" id="nextButton">
+            <img class="withImage" src="../img/backSvetovanje.svg" alt="&lt; Svetovanje" />
+        </button>
+    </span>
+	<div id="progressBar" style="display:none">
+       <div class="progressText">
+           Prenašam podatke ...
+       </div>
+    </div>
+</body>
+</html>

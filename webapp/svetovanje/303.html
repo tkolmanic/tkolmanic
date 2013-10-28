@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>
+303
+</title>
+   <meta charset='utf-8'>
+    <link href="../css/moidom_iframe.css" rel="stylesheet">
+    <script charset="UTF-8" src="../js/jquery.min.js"></script>
+    <script charset="UTF-8" src="../common.js"></script>
+    <script charset="UTF-8" src="../iframe.js"></script>
+<script>
+var NODE_ID = 'node303';
+</script>
+</head>
+<body onload="updateButtonsWithImages()">
+<h1 id="title">
+Zmanjšanje porabe električne energije
+</h1>
+<p id="text1">
+Za namen zmanjšanja porabe električne energije navedite, za katere naprave vas zanima zmanjšanje porabe.
+</p>
+<p id="text2">
+Izberite možnost.
+</p>
+<table class="selectNext">
+<tr onClick="selectNext(NODE_ID,'radio=radio11', '305.html')"><td>Ogrevanje</td><td class="next">&gt;</td></tr>
+<tr onClick="selectNext(NODE_ID,'radio=radio12', '306.html')"><td>Razsvetljava</td><td class="next">&gt;</td></tr>
+<tr onClick="selectNext(NODE_ID,'radio=radio13', '307.html')"><td>Bela tehnika</td><td class="next">&gt;</td></tr>
+<tr onClick="selectNext(NODE_ID,'radio=radio14', '318.html')"><td>Mali gospodinski aparati</td><td class="next">&gt;</td></tr>
+</table>
+	<span>
+        <button class="withImage" onclick="setPage('start.html')" id="nextButton">
+            <img class="withImage" src="../img/backSvetovanje.svg" alt="&lt; Svetovanje" />
+        </button>
+    </span>
+	<div id="progressBar" style="display:none">
+       <div class="progressText">
+           Prenašam podatke ...
+       </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- See description at https://build.phonegap.com/docs/config-xml -->
+<widget xmlns     = "http://www.w3.org/ns/widgets"
+        xmlns:gap = "http://phonegap.com/ns/1.0"
+        id        = "si.moidom"
+        version   = "1.0.10">
+    <name>mOIDom</name>
+
+    <description>
+        mOIDom mobilna aplikacija
+    </description>
+
+    <author href="http://www.cobik.com" email="info@cobik.si">
+        CO BIK
+    </author>
+
+    <preference name="phonegap-version" value="2.9.0" />
+    <preference name="orientation"      value="default" />
+    <preference name="target-device"    value="universal" />
+    <preference name="fullscreen"       value="false" />
+
+    <icon src="res/icon/blackberry/icon-80.png"     gap:platform="blackberry" />
+    <icon src="res/icon/blackberry/icon-80.png"     gap:platform="blackberry" gap:state="hover"/>
+
+    <gap:splash src="res/splash/blackberry/screen-225.png"         gap:platform="blackberry" />
+
+    <!-- the elements thus far are for phonegap build
+    the next elements are for blackberry 10 build -->
+    <content src="index.html"/> 
+    
+    <feature id="blackberry.ui.dialog"/>
+
+    <feature id="blackberry.app">
+        <param name="orientation" value="portrait" />
+        <param name="backgroundColor" value="0xFFFF0000" />
+    </feature>
+
+    <access uri="http://www.moidom.si" subdomains="true">
+        <feature id="blackberry.app" required="true" version="1.0.0"/>
+        <feature id="blackberry.invoke" required="true" version="1.0.0"/>
+    </access>
+ 
+    
+</widget>

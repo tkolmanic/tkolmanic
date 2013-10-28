@@ -1,0 +1,129 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>
+161
+</title>
+	<meta charset='utf-8'>
+    <link href="../css/moidom_iframe.css" rel="stylesheet">
+    <script charset="UTF-8" src="../js/jquery.min.js"></script>
+    <script charset="UTF-8" src="../common.js"></script>
+    <script charset="UTF-8" src="../iframe.js"></script>
+    <script>var NODE_ID = 'node161';</script>
+<script>
+function doCalculate()
+{
+var t=parseDecimal($('#t').val());
+var n=parseDecimal($('#n').val());
+var pret=parseDecimal($('#pret').val());
+var porena=t*n*pret;
+var št=parseDecimal($('#št').val());
+var porvsi=t*n*pret*št;
+var por=t*n*pret*št*365/1000;
+porena= Math.round(porena * 100) / 100;
+$("#porena").html (localizeDecimal(porena));
+if (isNaN(porena)) {$("#porena").html ('(popravi vnos)');}
+porvsi= Math.round(porvsi * 100) / 100;
+$("#porvsi").html (localizeDecimal(porvsi));
+if (isNaN(porvsi)) {$("#porvsi").html ('(popravi vnos)');}
+por= Math.round(por * 100) / 100;
+$("#por").html (localizeDecimal(por));
+if (isNaN(por)) {$("#por").html ('(popravi vnos)');}
+var predvid=parseDecimal($('#predvid').val());
+x=predvid/por*100;
+var xx = Math.abs (x-100);
+    var innerHtml = '';
+    if (xx<=20) {
+        innerHtml='<span style="background:#6f6">Odlično.</span>';
+    } else if (xx <= 50) {
+        innerHtml='<span style="background:#f90">Dobro.</span>';
+    } else if (!isNaN(xx)) {
+        innerHtml='<span style="background:#f66">Slabo.</span>';
+    }
+    $("#evaluation").html (innerHtml);
+    $("#nextButton").attr ('disabled', false);
+}
+
+function updateUserDataPersons()
+{
+    $.ajax({
+        url: DATA_URL + 'user/get_profile',
+        type: 'GET',
+        xhrFields: { withCredentials: true },
+        success: function(data, textStatus, xhr) {
+            $('#št').val(data.persons);
+        }
+    })
+}
+
+function initializePage() {
+    updateButtonsWithImages();
+    updateUserDataPersons();
+}
+</script>
+</head>
+<body onload="initializePage()">
+<h1 id="title">
+Umivanje zob
+</h1>
+<p id="text1">
+Umivanje zob naj bi trajalo vsaj tri minute. V kolikor si natočimo vodo za umivanje zob v kozarec, je poraba vode med enim in dvema decilitroma. Izračunajte, kolika je poraba vode, če si zobe umivamo dvakrat na dan ob stalno tekoči vodi in je pretok vode 4L/min.
+</p>
+<p id="text2">
+Da se rezultat izračuna samodejno, v obrazec dopolni podatke, ki jih nisi vnesel v aplikacijo mOIDom. 
+</p>
+<form>
+<table>
+<tr><td>Predvidite koliko kubičnih metrov bi potrošila vaša družina v enem letu, ob predpostavkah v besedilu naloge.</td>
+<td><input type="number" class="narrow" name="predvid" id="predvid" onkeyup="doCalculate()" /></td>
+<td>m^3/leto</td></tr>
+</table>
+<table>
+<tr><td>Čas umivanja zob</td>
+<td><input type="number" class="narrow" name="t" id="t" onkeyup="doCalculate()" /></td>
+<td>min</td></tr>
+<tr><td>Število umivanj zob na dan</td>
+<td><input type="number" class="narrow" name="n" id="n" onkeyup="doCalculate()" /></td>
+<td></td></tr>
+<tr><td>Pretok vode</td>
+<td><input type="number" class="narrow" name="pret" id="pret" onkeyup="doCalculate()" /></td>
+<td>L/min</td></tr>
+<tr><td>Poraba vode ene osebe na dan</td>
+<td><span id="porena"></span> </td>
+<td>L/dan</td></tr>
+<tr><td>Število članov gospodinjstva</td>
+<td><input type="number" class="narrow" name="št" id="št" onkeyup="doCalculate()" /></td>
+<td>oseb</td></tr>
+<tr><td>Poraba vode vseh članov gospodinjstva skupaj na dan</td>
+<td><span id="porvsi"></span> </td>
+<td>L/dan</td></tr>
+<tr><td>Poraba vode vseh članov gospodinjstva skupaj na leto</td>
+<td><span id="por"></span> </td>
+<td>m^3/leto</td></tr>
+</table>
+
+<div id="evaluation1"></div>
+<div id="text4">Vaše predvidevanje je bilo: <span id="evaluation">
+</span></div>
+
+</form>
+	<span>
+        <button class="withImage" onclick="setPage('start.html')" id="nextButton2">
+            <img class="withImage" src="../img/backSvetovanje.svg" alt="&lt; Svetovanje" />
+        </button>
+    </span>
+    <span>
+        <button class="withImage"
+            onclick="logAndSetPage(NODE_ID, $('form').serialize(),'162.html')" id="nextButton" disabled>
+            <img class="withImage" src="../img/nextNaprej.svg" alt="Naprej &gt;" />
+        </button>
+    </span>
+	
+
+    <div id="progressBar" style="display:none">
+       <div class="progressText">
+       Prenašam podatke ...
+       </div>
+    </div>
+</body>
+</html>

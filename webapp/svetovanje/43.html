@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>
+43
+</title>
+	<meta charset='utf-8'>
+    <link href="../css/moidom_iframe.css" rel="stylesheet">
+    <script charset="UTF-8" src="../js/jquery.min.js"></script>
+    <script charset="UTF-8" src="../common.js"></script>
+    <script charset="UTF-8" src="../iframe.js"></script>
+    <script>var NODE_ID = 'node43';</script>
+<script>
+function doCalculate()
+{
+var P=parseDecimal($('#P').val());
+var h=parseDecimal($('#h').val());
+var MT=parseDecimal($('#MT').val());
+var stro=P/1000*h*MT*365;
+stro= Math.round(stro * 100) / 100;
+$("#stro").html (localizeDecimal(stro));
+if (isNaN(stro)) {$("#stro").html ('(popravi vnos)');}
+var predvid=parseDecimal($('#predvid').val());
+x=predvid/stro*100;
+var xx = Math.abs (x-100);
+    var innerHtml = '';
+    if (xx<=20) {
+        innerHtml='<span style="background:#6f6">Odlično.</span>';
+    } else if (xx <= 50) {
+        innerHtml='<span style="background:#f90">Dobro.</span>';
+    } else if (!isNaN(xx)) {
+        innerHtml='<span style="background:#f66">Slabo.</span>';
+    }
+    $("#evaluation").html (innerHtml);
+    $("#nextButton").attr ('disabled', false);
+}
+</script>
+</head>
+<body onload="updateButtonsWithImages()">
+<h1 id="title">
+Elektrika
+</h1>
+<p id="text1">
+Koliko električne energije v povprečju porabijo prenosni računalniki, če jih uporabljate v MT?
+</p>
+<p id="text2">
+Da se rezultat 
+izračuna samodejno, v obrazec dopolnite podatke, ki jih niste vpisali v aplikacijo mOIDom. 
+</p>
+<form>
+<table>
+<tr><td>Predvidi, kolikšen je strošek električne energije prenosnega računalnika na leto.</td>
+<td><input type="number" class="narrow" name="predvid" id="predvid" onkeyup="doCalculate()" /></td>
+<td>EUR</td></tr>
+</table>
+<table>
+<tr><td>Moč prenosnega računalnika</td>
+<td><input type="number" class="narrow" name="P" id="P" onkeyup="doCalculate()" /></td>
+<td>W</td></tr>
+<tr><td>Povprečna uporaba računalnika na dan</td>
+<td><input type="number" class="narrow" name="h" id="h" onkeyup="doCalculate()" /></td>
+<td>h</td></tr>
+<tr><td>Cena elektrike: dvotarifni MT</td>
+<td><input type="number" class="narrow" name="MT" id="MT" onkeyup="doCalculate()" /></td>
+<td>EUR/kWh</td></tr>
+<tr><td>Strošek na leto</td>
+<td><span id="stro"></span> </td>
+<td>EUR</td></tr>
+</table>
+
+<div id="evaluation1"></div>
+<div id="text4">Vaše predvidevanje je bilo: <span id="evaluation">
+</span></div>
+
+</form>
+	<span>
+        <button class="withImage" onclick="setPage('start.html')" id="nextButton2">
+            <img class="withImage" src="../img/backSvetovanje.svg" alt="&lt; Svetovanje" />
+        </button>
+    </span>
+    <span>
+        <button class="withImage"
+            onclick="logAndSetPage(NODE_ID, $('form').serialize(),'44.html')" id="nextButton" disabled>
+            <img class="withImage" src="../img/nextNaprej.svg" alt="Naprej &gt;" />
+        </button>
+    </span>
+	
+
+    <div id="progressBar" style="display:none">
+       <div class="progressText">
+       Prenašam podatke ...
+       </div>
+    </div>
+</body>
+</html>

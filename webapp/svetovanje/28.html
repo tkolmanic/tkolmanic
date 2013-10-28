@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>
+28
+</title>
+    <meta charset='utf-8'>
+    <link href="../css/moidom_iframe.css" rel="stylesheet">
+    <script charset="UTF-8" src="../js/jquery.min.js"></script>
+    <script charset="UTF-8" src="../common.js"></script>
+    <script charset="UTF-8" src="../iframe.js"></script>
+<script>
+var NODE_ID = 'node28';
+</script>
+</head>
+<body onload="updateButtonsWithImages()">
+<h1 id="title">
+Elektrika
+</h1>
+<p id="text1">
+Električni mešalnik je priključen na napetost 220 V (volt je enota za napetost). Skozenj teče električni tok 0.3 A (amper je enota za tok). Kolikšno električno delo opravi v 3 minutah delovanja? Delo izračunamo kot produkt napetosti, toka in časa. Namig: U*I*t, U=napetost, I=tok, t=čas.
+</p>
+<p id="text2">
+Označite trditev s klikom.
+</p>
+<table class="selectEvaluate">
+<tr onClick="selectEvaluate(NODE_ID,'radio=radio1', 1)"><td>3.3 Wh.</td><td class="next">&gt;</td></tr>
+<tr onClick="selectEvaluate(NODE_ID,'radio=radio2', 0)"><td>3.3 kWh.</td><td class="next">&gt;</td></tr>
+<tr onClick="selectEvaluate(NODE_ID,'radio=radio3', 0)"><td>198 Wh.</td><td class="next">&gt;</td></tr>
+<tr onClick="selectEvaluate(NODE_ID,'radio=radio4', 0)"><td>198 kWh.</td><td class="next">&gt;</td></tr>
+</table>
+<p></p>
+    <p id="evaluation">Čakam na odgovor.</p>
+
+	<span>
+        <button class="withImage" onclick="setPage('start.html')" id="nextButton2">
+            <img class="withImage" src="../img/backSvetovanje.svg" alt="&lt; Svetovanje" />
+        </button>
+    </span>
+	<span>
+<button class="withImage" onclick="setPage('29.html')" id="nextButton" disabled>
+            <img class="withImage" src="../img/nextNaprej.svg" alt="Naprej &gt;" />
+        </button>
+    </span>
+    <div id="progressBar" style="display:none">
+       <div class="progressText">
+       Prenašam podatke ...
+       </div>
+    </div>
+</body>
+</html>

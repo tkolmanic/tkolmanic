@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>
+40
+</title>
+   <meta charset='utf-8'>
+    <link href="../css/moidom_iframe.css" rel="stylesheet">
+    <script charset="UTF-8" src="../js/jquery.min.js"></script>
+    <script charset="UTF-8" src="../common.js"></script>
+    <script charset="UTF-8" src="../iframe.js"></script>
+<script>
+var NODE_ID = 'node40';
+</script>
+</head>
+<body onload="updateButtonsWithImages()">
+<h1 id="title">
+Elektrika
+</h1>
+<p id="text1">
+Koliko električne energije v povprečju porabijo prenosni računalniki?
+</p>
+<p id="text2">
+Izberite tarifo, za katero vas zanima izračun naloge.
+</p>
+<table class="selectNext">
+<tr onClick="selectNext(NODE_ID,'radio=radio314', '41.html')"><td>Enotarifni ET. (ET = Enotna tarifa je tarifa, ki jo beleži enotarifni števec vsak dan od 0. do 24. ure.)</td><td class="next">&gt;</td></tr>
+<tr onClick="selectNext(NODE_ID,'radio=radio315', '42.html')"><td>Dvotarifni VT. (VT = Večja tarifa je tarifa, ki jo dvotarifni števec beleži vsak delavnik od 6. do 22. ure.)</td><td class="next">&gt;</td></tr>
+<tr onClick="selectNext(NODE_ID,'radio=radio316', '43.html')"><td>Dvotarifni MT. (MT = Manjša tarifa je tarifa, ki jo dvotarifni števec beleži vsak delavnik od 22. do 6. ure naslednjega dne ter v soboto, nedeljo in dela prost dan od 0. do 24. ure.)</td><td class="next">&gt;</td></tr>
+</table>
+	<span>
+        <button class="withImage" onclick="setPage('start.html')" id="nextButton">
+            <img class="withImage" src="../img/backSvetovanje.svg" alt="&lt; Svetovanje" />
+        </button>
+    </span>
+	<div id="progressBar" style="display:none">
+       <div class="progressText">
+           Prenašam podatke ...
+       </div>
+    </div>
+</body>
+</html>

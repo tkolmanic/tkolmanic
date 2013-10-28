@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>
+410
+</title>
+   <meta charset='utf-8'>
+    <link href="../css/moidom_iframe.css" rel="stylesheet">
+    <script charset="UTF-8" src="../js/jquery.min.js"></script>
+    <script charset="UTF-8" src="../common.js"></script>
+    <script charset="UTF-8" src="../iframe.js"></script>
+<script>
+var NODE_ID = 'node410';
+</script>
+</head>
+<body onload="updateButtonsWithImages()">
+<h1 id="title">
+Lahko poiščete druge vire.
+</h1>
+<p id="text1">
+Obstajajo drugi viri vode, ki jih lahko koristite za uporabo v gospodinjstvu. Za stranišče in pranje ni nujno potrebno imeti pitne vode iz vodovoda zato preverite če imate možnost koristit sledeče alternative:
+</p>
+<p id="text2">
+Izberite možnost.
+</p>
+<table class="selectNext">
+<tr onClick="selectNext(NODE_ID,'radio=radio43', '411.html')"><td>Voda iz lastnega vodnjaka.</td><td class="next">&gt;</td></tr>
+<tr onClick="selectNext(NODE_ID,'radio=radio44', '412.html')"><td>Deževnica.</td><td class="next">&gt;</td></tr>
+</table>
+	<span>
+        <button class="withImage" onclick="setPage('start.html')" id="nextButton">
+            <img class="withImage" src="../img/backSvetovanje.svg" alt="&lt; Svetovanje" />
+        </button>
+    </span>
+	<div id="progressBar" style="display:none">
+       <div class="progressText">
+           Prenašam podatke ...
+       </div>
+    </div>
+</body>
+</html>

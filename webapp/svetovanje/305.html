@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>
+305
+</title>
+   <meta charset='utf-8'>
+    <link href="../css/moidom_iframe.css" rel="stylesheet">
+    <script charset="UTF-8" src="../js/jquery.min.js"></script>
+    <script charset="UTF-8" src="../common.js"></script>
+    <script charset="UTF-8" src="../iframe.js"></script>
+<script>
+var NODE_ID = 'node305';
+</script>
+</head>
+<body onload="updateButtonsWithImages()">
+<h1 id="title">
+Ogrevanje na električno energijo
+</h1>
+<p id="text1">
+Če se ogrevate na električno energijo, je potrebno vedeti, da je to dovoljeno le v izrednih primerih kot podporno ogrevanje ali pa s toplotnimi črpalkami. Zato imate sledeče možnosti:
+</p>
+<p id="text2">
+Izberite možnost.
+</p>
+<table class="selectNext">
+<tr onClick="selectNext(NODE_ID,'radio=radio19', '212.html')"><td>Prehod na drug energent.</td><td class="next">&gt;</td></tr>
+<tr onClick="selectNext(NODE_ID,'radio=radio20', '218.html')"><td>Prehod na visokoučinkovito ogrevanje z električno energijo.</td><td class="next">&gt;</td></tr>
+</table>
+	<span>
+        <button class="withImage" onclick="setPage('start.html')" id="nextButton">
+            <img class="withImage" src="../img/backSvetovanje.svg" alt="&lt; Svetovanje" />
+        </button>
+    </span>
+	<div id="progressBar" style="display:none">
+       <div class="progressText">
+           Prenašam podatke ...
+       </div>
+    </div>
+</body>
+</html>

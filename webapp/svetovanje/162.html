@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>
+162
+</title>
+	<meta charset='utf-8'>
+    <link href="../css/moidom_iframe.css" rel="stylesheet">
+    <script charset="UTF-8" src="../js/jquery.min.js"></script>
+    <script charset="UTF-8" src="../common.js"></script>
+    <script charset="UTF-8" src="../iframe.js"></script>
+    <script>var NODE_ID = 'node162';</script>
+<script>
+function doCalculate()
+{
+var V=parseDecimal($('#V').val());
+var pret=parseDecimal($('#pret').val());
+var t=parseDecimal($('#t').val());
+var por1=pret*t;
+var por2=V;
+var por=por2-por1;
+por1= Math.round(por1 * 100) / 100;
+$("#por1").html (localizeDecimal(por1));
+if (isNaN(por1)) {$("#por1").html ('(popravi vnos)');}
+por2= Math.round(por2 * 100) / 100;
+$("#por2").html (localizeDecimal(por2));
+if (isNaN(por2)) {$("#por2").html ('(popravi vnos)');}
+por= Math.round(por * 100) / 100;
+$("#por").html (localizeDecimal(por));
+if (isNaN(por)) {$("#por").html ('(popravi vnos)');}
+var predvid=parseDecimal($('#predvid').val());
+x=predvid/por*100;
+var xx = Math.abs (x-100);
+    var innerHtml = '';
+    if (xx<=20) {
+        innerHtml='<span style="background:#6f6">Odlično.</span>';
+    } else if (xx <= 50) {
+        innerHtml='<span style="background:#f90">Dobro.</span>';
+    } else if (!isNaN(xx)) {
+        innerHtml='<span style="background:#f66">Slabo.</span>';
+    }
+    $("#evaluation").html (innerHtml);
+    $("#nextButton").attr ('disabled', false);
+}
+</script>
+</head>
+<body onload="updateButtonsWithImages()">
+<h1 id="title">
+Prhanje ali kopanje?
+</h1>
+<p id="text1">
+Kopalne kadi se med seboj zelo razlikujejo  po volumnu, tako da ga morate za vsako kad izmeriti posebej. Za naš izračun bomo privzeli volumen kadi 120 L. Za prhanje bomo privzeli pretok vode 4L/min ter povprečni čas prhanja, ki je 5 min.
+</p>
+<p id="text2">
+Da se rezultat izračuna samodejno, v obrazec dopolni podatke, ki jih nisi vnesel v aplikacijo mOIDom. 
+</p>
+<form>
+<table>
+<tr><td>Predvidite kolikšna je razlika v L v porabi vode pri prhanju ali pri kopanju.</td>
+<td><input type="number" class="narrow" name="predvid" id="predvid" onkeyup="doCalculate()" /></td>
+<td>L</td></tr>
+</table>
+<table>
+<tr><td>Volumen kadi</td>
+<td><input type="number" class="narrow" name="V" id="V" onkeyup="doCalculate()" /></td>
+<td>L</td></tr>
+<tr><td>Pretok vode</td>
+<td><input type="number" class="narrow" name="pret" id="pret" onkeyup="doCalculate()" /></td>
+<td>L/min</td></tr>
+<tr><td>Čas prhanja</td>
+<td><input type="number" class="narrow" name="t" id="t" onkeyup="doCalculate()" /></td>
+<td>min</td></tr>
+<tr><td>Poraba vode pri prhanju</td>
+<td><span id="por1"></span> </td>
+<td>L</td></tr>
+<tr><td>Poraba vode pri kopanju</td>
+<td><span id="por2"></span> </td>
+<td>L</td></tr>
+<tr><td>Razlika</td>
+<td><span id="por"></span> </td>
+<td>L</td></tr>
+</table>
+
+<div id="evaluation1"></div>
+<div id="text4">Vaše predvidevanje je bilo: <span id="evaluation">
+</span></div>
+
+</form>
+	<span>
+        <button class="withImage" onclick="setPage('start.html')" id="nextButton2">
+            <img class="withImage" src="../img/backSvetovanje.svg" alt="&lt; Svetovanje" />
+        </button>
+    </span>
+    <span>
+        <button class="withImage"
+            onclick="logAndSetPage(NODE_ID, $('form').serialize(),'163.html')" id="nextButton" disabled>
+            <img class="withImage" src="../img/nextNaprej.svg" alt="Naprej &gt;" />
+        </button>
+    </span>
+	
+
+    <div id="progressBar" style="display:none">
+       <div class="progressText">
+       Prenašam podatke ...
+       </div>
+    </div>
+</body>
+</html>

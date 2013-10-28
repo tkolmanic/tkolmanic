@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>
+402
+</title>
+   <meta charset='utf-8'>
+    <link href="../css/moidom_iframe.css" rel="stylesheet">
+    <script charset="UTF-8" src="../js/jquery.min.js"></script>
+    <script charset="UTF-8" src="../common.js"></script>
+    <script charset="UTF-8" src="../iframe.js"></script>
+<script>
+var NODE_ID = 'node402';
+</script>
+</head>
+<body onload="updateButtonsWithImages()">
+<h1 id="title">
+Zmanjšanje porabe vode
+</h1>
+<p id="text1">
+Varčevanje z vodo je z vidika okolja in stroškov zelo pomembno opravilo. V kolikor še nimate vgrajenega lastnega števca za vodo vam priporočamo da si tega vgradite. Za zmanjšanje porabe vode imate več možnosti, kje lahko varčujete.
+</p>
+<p id="text2">
+Izberite možnost.
+</p>
+<table class="selectNext">
+<tr onClick="selectNext(NODE_ID,'radio=radio10', '403.html')"><td>Varčevanje v kuhinji.</td><td class="next">&gt;</td></tr>
+<tr onClick="selectNext(NODE_ID,'radio=radio11', '404.html')"><td>Varčevanje na stranišču.</td><td class="next">&gt;</td></tr>
+<tr onClick="selectNext(NODE_ID,'radio=radio12', '405.html')"><td>Varčevanje v kopalnici.</td><td class="next">&gt;</td></tr>
+<tr onClick="selectNext(NODE_ID,'radio=radio13', '406.html')"><td>Varčevanje na vrtu.</td><td class="next">&gt;</td></tr>
+<tr onClick="selectNext(NODE_ID,'radio=radio14', '407.html')"><td>Varčevanje v pralnici</td><td class="next">&gt;</td></tr>
+</table>
+	<span>
+        <button class="withImage" onclick="setPage('start.html')" id="nextButton">
+            <img class="withImage" src="../img/backSvetovanje.svg" alt="&lt; Svetovanje" />
+        </button>
+    </span>
+	<div id="progressBar" style="display:none">
+       <div class="progressText">
+           Prenašam podatke ...
+       </div>
+    </div>
+</body>
+</html>

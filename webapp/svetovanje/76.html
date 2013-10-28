@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>
+76
+</title>
+    <meta charset='utf-8'>
+    <link href="../css/moidom_iframe.css" rel="stylesheet">
+    <script charset="UTF-8" src="../js/jquery.min.js"></script>
+    <script charset="UTF-8" src="../common.js"></script>
+    <script charset="UTF-8" src="../iframe.js"></script>
+<script>
+var NODE_ID = 'node76';
+</script>
+</head>
+<body onload="updateButtonsWithImages()">
+<h1 id="title">
+Toplota
+</h1>
+<p id="text1">
+Koliko časa mora biti vključen električni grelec z močjo P=700 W, da se prostornina dveh litrov vode, čemur ustreza masa m=2 kg, segreje z 22˚C na 100˚C? Namig: Toplota Q, potrebna za segrevanje v tej nalogi, je enaka Q=m*C*∆T, zagotovi pa jo z električnim delom grelec, kar izračunamo Q=P*t. Pri tem je specifična toplota vode c=4200 J/kgK, ∆T pa predstavlja temperaturno razliko pri segrevanju vode. Čas segrevanja, ki nas zanima, je označen s t. Namig: (m*c*∆T)/(P), m=masa, c=specifična toplota, ∆T=sprememba temperature, P=moč.
+</p>
+<p id="text2">
+Označite trditev s klikom.
+</p>
+<table class="selectEvaluate">
+<tr onClick="selectEvaluate(NODE_ID,'radio=radio1', 0)"><td>10 min.</td><td class="next">&gt;</td></tr>
+<tr onClick="selectEvaluate(NODE_ID,'radio=radio2', 0)"><td>0.5 h.</td><td class="next">&gt;</td></tr>
+<tr onClick="selectEvaluate(NODE_ID,'radio=radio3', 1)"><td>15.6 min.</td><td class="next">&gt;</td></tr>
+<tr onClick="selectEvaluate(NODE_ID,'radio=radio4', 0)"><td>0.2 h.</td><td class="next">&gt;</td></tr>
+</table>
+<p></p>
+    <p id="evaluation">Čakam na odgovor.</p>
+
+	<span>
+        <button class="withImage" onclick="setPage('start.html')" id="nextButton2">
+            <img class="withImage" src="../img/backSvetovanje.svg" alt="&lt; Svetovanje" />
+        </button>
+    </span>
+	<span>
+<button class="withImage" onclick="setPage('77.html')" id="nextButton" disabled>
+            <img class="withImage" src="../img/nextNaprej.svg" alt="Naprej &gt;" />
+        </button>
+    </span>
+    <div id="progressBar" style="display:none">
+       <div class="progressText">
+       Prenašam podatke ...
+       </div>
+    </div>
+</body>
+</html>

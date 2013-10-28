@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>
+244
+</title>
+   <meta charset='utf-8'>
+    <link href="../css/moidom_iframe.css" rel="stylesheet">
+    <script charset="UTF-8" src="../js/jquery.min.js"></script>
+    <script charset="UTF-8" src="../common.js"></script>
+    <script charset="UTF-8" src="../iframe.js"></script>
+<script>
+var NODE_ID = 'node244';
+</script>
+</head>
+<body onload="updateButtonsWithImages()">
+<h1 id="title">
+Izolacija strehe
+</h1>
+<p id="text1">
+Priporočljiva debelina izolacijskega ovoja na strehi je 25 cm standardne debeline izolacijskega materiala. Pod izolacijo je potrebno namestiti parno zaporo ali oviro, ki preprečuje nabiranje vlage v izolacijskem materialu. Način izvedbe izolacije ostrešja se razlikuje pri sledečih tipih ostrešij.
+</p>
+<p id="text2">
+Izberite možnost.
+</p>
+<table class="selectNext">
+<tr onClick="selectNext(NODE_ID,'radio=radio221', '247.html')"><td>Zaprto ostrešje</td><td class="next">&gt;</td></tr>
+<tr onClick="selectNext(NODE_ID,'radio=radio222', '248.html')"><td>Odprto ostrešje</td><td class="next">&gt;</td></tr>
+<tr onClick="selectNext(NODE_ID,'radio=radio223', '249.html')"><td>Ravna streha</td><td class="next">&gt;</td></tr>
+</table>
+	<span>
+        <button class="withImage" onclick="setPage('start.html')" id="nextButton">
+            <img class="withImage" src="../img/backSvetovanje.svg" alt="&lt; Svetovanje" />
+        </button>
+    </span>
+	<div id="progressBar" style="display:none">
+       <div class="progressText">
+           Prenašam podatke ...
+       </div>
+    </div>
+</body>
+</html>

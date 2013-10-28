@@ -1,0 +1,368 @@
+﻿<!DOCTYPE html>
+<html lang="sl">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="css/bootstrap.css" rel="stylesheet">
+        <link href="css/bootstrap-responsive.css" rel="stylesheet">
+        <link href="css/bootstrap-timepicker.min.css" rel="stylesheet">
+        <link href="css/bootstrap-fileupload.min.css" rel="stylesheet">
+        <link href="css/moidom.css" rel="stylesheet">
+        <!-- mobile.css is added conditionally, see code below  -->
+        
+        <script charset="UTF-8" src="js/jquery.min.js"></script>
+        <script charset="UTF-8" src="js/jquery.cookie.js"></script>
+        <script charset="UTF-8" src="js/jquery.form.js"></script>
+        <script charset="UTF-8" src="js/jquery.validate.js"></script>
+        <script charset="UTF-8" src="js/bootstrap.min.js"></script>
+        <script charset="UTF-8" src="js/bootstrap-datepicker.js"></script>
+        <script charset="UTF-8" src="js/bootstrap-datepicker.sl.js"></script>
+        <script charset="UTF-8" src="js/bootstrap-timepicker.min.js"></script>
+        <script charset="UTF-8" src="js/bootstrap-fileupload.min.js"></script>
+        <script charset="UTF-8" src="js/ocr.js"></script>
+        <script charset="UTF-8" src="common.js"></script>
+        
+        <script>
+            //
+            // VARIABLES
+            //
+            // PhoneGap Ready variable. Initialized to 'false' (device not ready) and
+            // set to 'true' when the device is ready.
+            var pgReady = false;
+
+            var DATA_URL = getDataUrl(); // in common.js
+            var HTML_URL = "";
+
+            //
+            function onBodyLoad() {
+                // Register the event handler 
+                document.addEventListener("deviceready", onDeviceReady, false);
+                
+                if (isMobileEnvironment()) {
+                    // copy the locations defined only once and used twice
+                    $('#facebookMobile').attr('href', $('#facebookSocial').attr('href'));
+                    $('#twitterMobile').attr('href', $('#twitterSocial').attr('href'));
+                    // copy the 'about' texts and icons
+                    $('#aboutText').html($('#welcome').html());
+                    $('#aboutIcons').html($('#partnerIcons').html());
+                    // modify the presentation styles for the mobiles
+                    var link = document.createElement("link");
+                    link.href = "css/mobile.css";
+                    link.type = "text/css";
+                    link.rel = "stylesheet";
+                    document.getElementsByTagName("head")[0].appendChild(link);
+                }
+                
+                
+                updateButtonsWithImages();
+                
+                addValidators();
+                
+                // see also function call at the end of script
+                
+                // if logged in, continue to the main page
+                $.ajax({
+                    url: DATA_URL + 'user/get_profile',
+                    type: 'GET',
+                    data: {},
+                    xhrFields: { withCredentials: true },
+                    success: function(data, textStatus, xhr)
+                    {
+                        if (data.status == 0)
+                            top.location.href = HTML_URL + 'main.html';
+                    },
+                    error: ajaxError
+                });
+                
+                
+                // Validate the input form: Login (registered user only) [Tab: Login]       
+                $("#formLogin").validate({
+                    rules:
+                    {
+                        email: {moidomRequired: true, email: true, maxlength: 50},
+                        password: {moidomRequired: true, minlength: 5, maxlength: 50}
+                    },
+                    submitHandler: function(form)
+                    {
+                        $.ajax({
+                            url: DATA_URL + 'user/login',
+                            type: 'POST',
+                            data: $(form).serialize(),
+                            xhrFields: { withCredentials: true },
+                            success: function(data, textStatus, xhr)
+                            {
+                                if (data.status == 0)
+                                    top.location.href = HTML_URL + 'main.html';
+                                else
+                                    alert('Prijava ni uspela: ' + data.status_loc);
+                            },
+                            error: ajaxError
+                        });
+                    }
+                });
+                
+                // Validate the input form: Register (new user) [Tab: Login]        
+                $("#formRegister").validate({
+                    rules:
+                    {
+                        email: {moidomRequired: true, email: true, maxlength: 50},
+                        password: {moidomRequired: true, minlength: 5, maxlength: 50},
+                        confPassword: {moidomRequired: true, minlength: 5, maxlength: 50, equalTo: "#password"},
+                        area: {moidomRequired: true, moidomPositiveInt: true},
+                        persons: {moidomRequired: true, moidomPositiveInt: true},
+                        in_power: {moidomPositiveInt: true},
+                        postal_code: {moidomPostalCode: true},
+                        out_power: {moidomDecimal: true},
+                    },
+                    submitHandler: function(form)
+                    {
+                        var requestData = {
+                            email: $('#email').val(),
+                            password: $('#password').val(),
+                            area: $('#area').val(),
+                            persons: $('#persons').val(),
+                            in_power: firstNonEmpty ($('#in_power').val(), '0'),
+                            postal_code: firstNonEmpty ($('#postal_code').val(), '0'),
+                            out_power: firstNonEmpty ($('#out_power').val().replace(',', '.'), '0')
+                        };
+                        $.ajax({
+                            url: DATA_URL + 'user/register',
+                            type: 'POST',
+                            data: requestData,
+                            xhrFields: { withCredentials: true },
+                            success: function(data, textStatus, xhr)
+                            {
+                                if (data.status == 0)
+                                    alert('Registracija je uspela. Poslana vam je bila elektronska pošta. Prosimo potrdite registracijo.');
+                                else
+                                    alert('Registracija ni uspela: ' + data.status_loc);
+                            },
+                            error: ajaxError
+                        });
+                    }
+                });
+                
+                
+                // Validate the input form: Forgot password [Tab: Login]
+                $("#formLostPass").validate({
+                    rules:
+                    {
+                        email: {moidomRequired: true, email: true, maxlength: 50},
+                    },
+                    submitHandler: function(form)
+                    {
+                        $.ajax({
+                            url: DATA_URL + 'user/lost_password',
+                            type: 'POST',
+                            data: { email: $('#lostPassEmail').val() },
+                            xhrFields: { withCredentials: true },
+                            success: function(data, textStatus, xhr)
+                            {
+                                if (data.status == 0)
+                                    alert('Novo geslo poslano na email');
+                                else
+                                    alert('Napaka pri pošiljanju novega gesla: ' + data.status_loc);
+                            },
+                            error: ajaxError
+                        });
+                    }
+                });
+            }
+
+            function onDeviceReady() {
+                if (navigator.connection.type == Connection.NONE) {
+                    alert('Za uporabo te aplikacije potrebujete internetno povezavo!');
+                }
+
+                // Set pgReady.
+                pgReady = true;
+            }
+            
+            
+            /* The functions shows and hides the elements making one of several screens
+            partToShow=
+                0 initial
+                1 login
+                2 lost password
+                3 register
+                4 about
+            */
+            function showScreen(partToShow) {
+                var isMobile = isMobileEnvironment();
+                showOrHide($('#mobileLogo'), partToShow == 0 && isMobile);
+                showOrHideById('loginButton', partToShow == 0);
+                showOrHideById('loginContent', partToShow == 1);
+                showOrHideById('lostPassButton', partToShow == 0);
+                showOrHideById('lostPassContent', partToShow == 2);
+                showOrHideById('registerButton', partToShow == 0);
+                showOrHideById('registerContent', partToShow == 3);
+                showOrHideById('facebookMobile', partToShow == 0);
+                showOrHideById('twitterMobile', partToShow == 0);
+                showOrHideById('aboutButton', partToShow == 0 && isMobile);
+                showOrHideById('aboutContent', partToShow == 4);
+            }
+            
+            //showScreen(0);
+
+        </script>
+        <title>mOIDom</title>
+    </head>
+
+    <body onload="onBodyLoad()">
+        <div class="mainWrap withPartners">
+            <div id="mainHeader" class="webOnly">
+                <a href="index.html" class="appLogo"></a>
+            </div>
+            <div class="mainContent">
+            
+                <div class="welcome webOnly" id="welcome">
+                    <h2>Pozdravljeni na spletni strani aplikacije mOIDom!</h2>
+                    <p>So vaši mesečni računi previsoki? Želite porabiti manj, pa ne veste kako? Če ste na vsaj eno vprašanje odgovorili z da, potem je aplikacija mOIDom prava izbira za vas. S pomočjo aplikacije mOIDom boste enostavno spremljali svojo porabo in z upoštevanjem varčevalnih nasvetov, ki jih aplikacija ponuja, zmanjšali stroške svojega gospodinjstva.</p>
+                    <p>mOIDom je spletna in mobilna aplikacija informativno-svetovalnega značaja, ki vam omogoča spremljanje porabe in stroškov gospodinjstva. Preko uporabnih nasvetov in praktičnih nalog boste spoznali, kje vaše gospodinjstvo izgublja denar in kaj spremeniti, da optimizirate porabo ter s tem privarčujete. Cilj aplikacije je tudi spodbujanje k varčevanju z energijo in tako zmanjševanje obremenjevanja okolja z emisijami in zviševanje energetske učinkovitosti zgradb.</p>
+					<p>Prenesite <a href="http://www.moidom.si/download">mobilno aplikacijo</a> na svoj telefon ali tablico.</p>                    
+                    <p>Uporabite aplikacijo, ukrepajte in privarčujte!</p>
+					<p>Pri varčevanju z energijo vam lahko pomagajo naprave pametnih zgradb. V 
+okviru projekta mOIDom smo pripravili virtualni računalnik za krmiljenje 
+manjših instalacij pametnih zgradb [ 
+<a href="FHEM/FHEM_modul.html">več</a>...].
+				</div>
+                    
+                <div class="tab-content">
+                    <div class="mobileLogo mobileOnly" id="mobileLogo">
+                        <img src="img/logo160color.png" style="margin:30px" alt="mOIDom logo">
+                    </div>
+                    <div class="mobileCentered" id="loginButton">
+                        <span class="btn btn-primary margin5" onclick="showScreen(1)">Prijava</span>
+                    </div>
+                    <div id="loginContent" class="margin20" style="display:none">
+                        <button class="withImage" onclick="showScreen(0)">
+                            <img class="withImage" src="img/backMoidom.svg" alt="&lt; Moidom" />
+                        </button>
+                        <form id="formLogin">
+                            <label>Elektronski naslov:</label>
+                            <input type="email" name="email" class="input-medim wide">
+                            <label>Geslo:</label>
+                            <input type="password" name="password" class="input-medim wide">
+                            <label>Ostanite prijavljeni:</label>
+                            <input type="checkbox" name="permanent" value="true" class="input-medim">
+                            <br />
+                            <div class="clearfix"></div>
+                            <br />
+                            <span class="webOnly">
+                                S klikom na prijavo se strinjate s <a href="pogoji.html">splošnimi pogoji</a>,
+                                ki vključujejo uporabo enega internega piškotka za potrebe sledenja prijavi v aplikaciji.
+                                <br />
+                            </span>
+							<span class="mobileOnly">
+                                S klikom na prijavo se strinjate s <a href="pogoji.html">splošnimi pogoji</a>.
+                                <br />
+                            </span>
+                            <input type="submit" value="Prijavi se" class="submit btn btn-primary">
+                        </form>
+                    </div>
+                    
+                    <div class="mobileCentered" id="lostPassButton">
+                        <span class="btn btn-primary margin5" onclick="showScreen(2)">Ste pozabili geslo?</span>
+                    </div>
+                    <div id="lostPassContent" style="display:none" class="margin20">
+                        <button class="withImage" onclick="showScreen(0)">
+                            <img class="withImage" src="img/backMoidom.svg" alt="&lt; Moidom" />
+                        </button>
+                        <form id="formLostPass">
+                         <p>Prosim, vnesite vaš registrirani elektronski naslov. Na ta naslov vam bomo poslali novo geslo, ki ga uporabite pri naslednji prijavi.</p>
+                         <br>
+                            <label>Elektronski naslov:</label>
+                            <input type="email" name="lostPassEmail" id="lostPassEmail" class="input-medium">
+                            <div class="clearfix"></div>
+                            <input type="submit" value="Pošlji zahtevo" class="submit btn btn-primary">
+                        </form>
+                    </div>
+                        
+                    <div class="mobileCentered" id="registerButton">
+                        <span class="btn btn-primary margin5" onclick="showScreen(3)">Nov uporabnik</span>
+                    </div>
+                    <div id="registerContent" style="display:none" class="margin20">
+                        <button class="withImage" onclick="showScreen(0)">
+                            <img class="withImage" src="img/backMoidom.svg" alt="&lt; Moidom" />
+                        </button>
+                        <form id="formRegister">
+                         <p>Prosim, vnesite zahtevane podatke. Polja, označena z *, so obvezna.</p>
+                         <strong>Podatki uporabnika:</strong>
+                            <label>* Elektronski naslov:</label>
+                            <input type="email" id="email" name="email" class="input-medium">
+                            <label>* Geslo za mOIDom:</label>
+                            <input type="password" id="password" name="password" class="input-medium">
+                            <label>* Potrdi geslo za mOIDom:</label>
+                            <input type="password" id="confPassword" name="confPassword" class="input-medium">
+
+                            <label></label>
+                            <strong>Podatki o stanovanju:</strong>
+                            <label></label>
+                            <label>* Površina stanovanja (m2, celo število):</label>
+                            <input type="number" id="area" name="area" class="input-medium">
+                            <label>* Število članov gospodinjstva:</label>
+                            <input type="number" id="persons" name="persons" class="input-medium">
+                            <label>Priključna moč električnega priključka (kW, celo število):</label>
+                            <input type="number" id="in_power" name="in_power" class="input-medium">
+                            <label>Poštna številka kraja bivanja:</label>
+                            <input type="number" id="postal_code" name="postal_code" class="input-medium">
+                            <label>Doma generirana moč (kW, decimalno število, decimalka je vejica ali pika):</label>
+                            <input type="text" id="out_power" name="out_power" class="input-medium">
+                            <div class="clearfix"></div>
+                            <input type="submit" value="Pošlji zahtevo" class="submit btn btn-primary">
+                        </form>
+                    </div>
+
+                </div>
+                    
+                <div class="mobileSocialIcons mobileOnly">
+                    <!-- these are larger than the icons for web, 
+                    href values are taken from #socialIcons not to duplicate the values -->
+                    <a href="" id="facebookMobile" target="_blank" ><img src="img/mobile/facebook40.png" alt="facebook"></a>
+                    <a href="" id="twitterMobile" target="_blank" ><img src="img/mobile/twitter40.png" alt="twitter"></a>
+                </div>
+                
+                
+                <div class="mobileCentered mobileOnly" id="aboutButton">
+                    <span class="btn btn-primary margin5" onclick="showScreen(4)">O nas</span>
+                </div>
+                <div id="aboutContent" style="display:none">
+                    <button class="withImage" onclick="showScreen(0)">
+                        <img class="withImage" src="img/backMoidom.svg" alt="&lt; Moidom" />
+                    </button>
+                    <div id="aboutText">
+                    <!--  the content is povided for mobile environment, programatically-->
+                    </div>
+                    <div id="aboutIcons">
+                    <!--  the content is povided for mobile environment, programatically-->
+                    </div>
+                </div>
+
+                
+            </div> <!-- mainContent -->
+            <div id="appFooter" class="clearfix webOnly">
+                <div class="center">
+                    <p id="partnerIcons">
+                        <img src="img/ref/esrr.png" alt="" width="200" height="50" />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <img src="img/ref/mizs.png" alt="" width="200" height="37" />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <img src="img/ref/cobik.png" alt="" width="100" height="34" />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <img src="img/ref/fnm.png" alt="" width="100" height="55" />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <img src="img/ref/energap.png" alt="" width="100" height="61" />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <img src="img/ref/ztks.png" alt="" width="120" height="38" />
+                    </p>
+                    <span>© 2013 mOIDom | Vse pravice pridržane.</span>
+                    <div class="socialIcons">
+                        <span>Sledite nam na </span>
+                        <a href="https://www.facebook.com/pages/Moidom/371804792918719?fref=ts" id="facebookSocial" target="_blank" class="facebook"></a>
+                        <a href="https://twitter.com/moidom_si" id="twitterSocial" target="_blank" class="twitter"></a>
+                    </div>
+                </div>
+            </div>
+        </div>  
+    </body>
+</html>

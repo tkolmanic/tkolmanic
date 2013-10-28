@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>
+82
+</title>
+    <meta charset='utf-8'>
+    <link href="../css/moidom_iframe.css" rel="stylesheet">
+    <script charset="UTF-8" src="../js/jquery.min.js"></script>
+    <script charset="UTF-8" src="../common.js"></script>
+    <script charset="UTF-8" src="../iframe.js"></script>
+<script>
+var NODE_ID = 'node82';
+</script>
+</head>
+<body onload="updateButtonsWithImages()">
+<h1 id="title">
+Toplota
+</h1>
+<p id="text1">
+Na led z maso 0.3 kg in temperaturo -12˚C vlijemo toplo vodo z maso 1 kg in temperaturo 80˚C. Kolikšna je končna temperatura? Specifična toplota ledu je 2100 J/kgK, talilna toplota vode je 334 kJ/kg, specifična toplota vode je 4200 J/kgK. Toploto Q izračunamo kot produkt specifične toplote, mase in razlike temperatur. Pri faznem prehodu (taljenje) pa toploto Q izračunamo kot produkt talilne toplote in mase. Predpostavimo, da se toplota ne izgublja. Namig: ((m1*c*(T1-To))-(m2*c1*(To-T2))-(m2*qt))/((m1+m2)*c), qt=talilna toplota, c=specifična toplota.
+</p>
+<p id="text2">
+Označite trditev s klikom.
+</p>
+<table class="selectEvaluate">
+<tr onClick="selectEvaluate(NODE_ID,'radio=radio1', 1)"><td>42˚C.</td><td class="next">&gt;</td></tr>
+<tr onClick="selectEvaluate(NODE_ID,'radio=radio2', 0)"><td>35˚C.</td><td class="next">&gt;</td></tr>
+<tr onClick="selectEvaluate(NODE_ID,'radio=radio3', 0)"><td>40˚C.</td><td class="next">&gt;</td></tr>
+<tr onClick="selectEvaluate(NODE_ID,'radio=radio4', 0)"><td>45˚C.</td><td class="next">&gt;</td></tr>
+</table>
+<p></p>
+    <p id="evaluation">Čakam na odgovor.</p>
+
+	<span>
+        <button class="withImage" onclick="setPage('start.html')" id="nextButton2">
+            <img class="withImage" src="../img/backSvetovanje.svg" alt="&lt; Svetovanje" />
+        </button>
+    </span>
+	<span>
+<button class="withImage" onclick="setPage('83.html')" id="nextButton" disabled>
+            <img class="withImage" src="../img/nextNaprej.svg" alt="Naprej &gt;" />
+        </button>
+    </span>
+    <div id="progressBar" style="display:none">
+       <div class="progressText">
+       Prenašam podatke ...
+       </div>
+    </div>
+</body>
+</html>

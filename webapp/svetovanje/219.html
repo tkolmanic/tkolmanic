@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>
+219
+</title>
+   <meta charset='utf-8'>
+    <link href="../css/moidom_iframe.css" rel="stylesheet">
+    <script charset="UTF-8" src="../js/jquery.min.js"></script>
+    <script charset="UTF-8" src="../common.js"></script>
+    <script charset="UTF-8" src="../iframe.js"></script>
+<script>
+var NODE_ID = 'node219';
+</script>
+</head>
+<body onload="updateButtonsWithImages()">
+<h1 id="title">
+Daljinska toplota novo
+</h1>
+<p id="text1">
+Preverite možnosti za uvedbo ogrevalnega sistema. Za uvedbo daljinskega sistema ogrevanja mora zgradba imeti dostop do daljinskega ogrevanja. Zato ugotavljam da:
+</p>
+<p id="text2">
+Izberite možnost.
+</p>
+<table class="selectNext">
+<tr onClick="selectNext(NODE_ID,'radio=radio94', '227.html')"><td>Imam možnost priklopa na daljinsko ogrevanje.</td><td class="next">&gt;</td></tr>
+<tr onClick="selectNext(NODE_ID,'radio=radio95', '212.html')"><td>Nimam možnosti uporabe tega sistema ogrevanja in bom šel nazaj na izbiro energenta.</td><td class="next">&gt;</td></tr>
+</table>
+	<span>
+        <button class="withImage" onclick="setPage('start.html')" id="nextButton">
+            <img class="withImage" src="../img/backSvetovanje.svg" alt="&lt; Svetovanje" />
+        </button>
+    </span>
+	<div id="progressBar" style="display:none">
+       <div class="progressText">
+           Prenašam podatke ...
+       </div>
+    </div>
+</body>
+</html>

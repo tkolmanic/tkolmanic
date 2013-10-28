@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>
+231
+</title>
+   <meta charset='utf-8'>
+    <link href="../css/moidom_iframe.css" rel="stylesheet">
+    <script charset="UTF-8" src="../js/jquery.min.js"></script>
+    <script charset="UTF-8" src="../common.js"></script>
+    <script charset="UTF-8" src="../iframe.js"></script>
+<script>
+var NODE_ID = 'node231';
+</script>
+</head>
+<body onload="updateButtonsWithImages()">
+<h1 id="title">
+Ogrevanje na pelete.
+</h1>
+<p id="text1">
+Ogrevanje na pelete sodi med najzanesljivejše in najbolj udobne načine ogrevanja. Kvaliteten ogrevalni sistem je sestavljen iz kotla na pelete z avtomatiziranim dovodom peletov iz zalogovnika za gorivo. Poleg tega je priporočljiv vmesni zalogovnik toplote, ki izboljša učinkovitost in delovanje sistema. Zalogovnik peletov bi naj bil tako velik, da zagotavlja letne potrebe po energiji v stavbi. Zagotovljen mora biti tudi dostop za dostavo peletov v zalogovnik z dostavnim vozilom. Obstajajo različne variante ogrevanja na pelete a je se potrebno zavedati, da le najbolj avtomatizirane in kvalitetne omogočajo udobje in zanesljivost, kot smo ga vajeni pri ogrevanju z recimo kurilnim oljem ali plinom. Ogrevalni sistem se lahko tudi kombinira z drugimi viri energije, kot je solarna energija, ki se lahko uporablja za pripravo tople vode v poletnih mesecih. 
+</p>
+<p id="text2">
+Izberite možnost.
+</p>
+<table class="selectNext">
+<tr onClick="selectNext(NODE_ID,'radio=radio169', '232.html')"><td>Kaj so peleti?</td><td class="next">&gt;</td></tr>
+<tr onClick="selectNext(NODE_ID,'radio=radio170', '233.html')"><td>Kaj je zalogovnik za pelete?</td><td class="next">&gt;</td></tr>
+<tr onClick="selectNext(NODE_ID,'radio=radio171', '234.html')"><td>Kaj je zalogovnik za toploto?</td><td class="next">&gt;</td></tr>
+</table>
+	<span>
+        <button class="withImage" onclick="setPage('start.html')" id="nextButton">
+            <img class="withImage" src="../img/backSvetovanje.svg" alt="&lt; Svetovanje" />
+        </button>
+    </span>
+	<div id="progressBar" style="display:none">
+       <div class="progressText">
+           Prenašam podatke ...
+       </div>
+    </div>
+</body>
+</html>

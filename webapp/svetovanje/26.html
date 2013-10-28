@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>
+26
+</title>
+    <meta charset='utf-8'>
+    <link href="../css/moidom_iframe.css" rel="stylesheet">
+    <script charset="UTF-8" src="../js/jquery.min.js"></script>
+    <script charset="UTF-8" src="../common.js"></script>
+    <script charset="UTF-8" src="../iframe.js"></script>
+<script>
+var NODE_ID = 'node26';
+</script>
+</head>
+<body onload="updateButtonsWithImages()">
+<h1 id="title">
+Elektrika
+</h1>
+<p id="text1">
+Grelno žico kuhalnika z uporom 25 Ω (ohm je enota za upornost) priključimo na napetost 220 V (volt je enota za električno napetost). Koliko električnega dela potroši kuhalnik v 2 urah? Električno delo izračunamo kot produkt časa in moči. Moč izračunamo kot produkt toka in napetosti. Tok pa izračunamo kot količnik med napetostjo in uporom. Namig: U*(U/R)*t   U=napetost, R=upor, t=čas
+</p>
+<p id="text2">
+Označite trditev s klikom.
+</p>
+<table class="selectEvaluate">
+<tr onClick="selectEvaluate(NODE_ID,'radio=radio1', 0)"><td>5.4 kWh</td><td class="next">&gt;</td></tr>
+<tr onClick="selectEvaluate(NODE_ID,'radio=radio2', 0)"><td>3700 Wh</td><td class="next">&gt;</td></tr>
+<tr onClick="selectEvaluate(NODE_ID,'radio=radio3', 1)"><td>3,9 kWh</td><td class="next">&gt;</td></tr>
+<tr onClick="selectEvaluate(NODE_ID,'radio=radio4', 0)"><td>1800 Wh</td><td class="next">&gt;</td></tr>
+</table>
+<p></p>
+    <p id="evaluation">Čakam na odgovor.</p>
+
+	<span>
+        <button class="withImage" onclick="setPage('start.html')" id="nextButton2">
+            <img class="withImage" src="../img/backSvetovanje.svg" alt="&lt; Svetovanje" />
+        </button>
+    </span>
+	<span>
+<button class="withImage" onclick="setPage('27.html')" id="nextButton" disabled>
+            <img class="withImage" src="../img/nextNaprej.svg" alt="Naprej &gt;" />
+        </button>
+    </span>
+    <div id="progressBar" style="display:none">
+       <div class="progressText">
+       Prenašam podatke ...
+       </div>
+    </div>
+</body>
+</html>

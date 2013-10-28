@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>
+230
+</title>
+   <meta charset='utf-8'>
+    <link href="../css/moidom_iframe.css" rel="stylesheet">
+    <script charset="UTF-8" src="../js/jquery.min.js"></script>
+    <script charset="UTF-8" src="../common.js"></script>
+    <script charset="UTF-8" src="../iframe.js"></script>
+<script>
+var NODE_ID = 'node230';
+</script>
+</head>
+<body onload="updateButtonsWithImages()">
+<h1 id="title">
+Biomasa sistem
+</h1>
+<p id="text1">
+Sistemi na lesno biomaso se delijo glede na vrsto goriva in kot uporabnik se moramo odločiti, kateri tip goriva ustreza nam in naši zgradbi. Najbolj avtomatiziran in najbolj zanesljiv način ogrevanja z lesno biomaso je ogrevanje na pelete. To je najprimernejše ogrevanje za večino uporabnikov s toplotno močjo do 100 kW. Primerno je zlasti za starejše uporabnike, ki nimajo možnosti fizičnega dela z gorivom. Naslednji način ogrevanja je ogrevanje s sekanci, ki je primerno predvsem za večje sisteme navadno od 50 kW dalje. Zadnji in najbolj razširjen način ogrevanja je ogrevanje na drva. Ta je najbolj primeren za moči do 50 kW in za uporabnike z lastnim dostopom do goriva. Manj primeren je za starejše uporabnike, saj zahteva nekaj fizičnega dela pri ogrevanju.Ugotavljam, da je zame najprimernejši način ogrevanja:
+</p>
+<p id="text2">
+Izberite možnost.
+</p>
+<table class="selectNext">
+<tr onClick="selectNext(NODE_ID,'radio=radio162', '231.html')"><td>Ogrevanje na pelete.</td><td class="next">&gt;</td></tr>
+<tr onClick="selectNext(NODE_ID,'radio=radio163', '232.html')"><td>Ogrevanje na sekance.</td><td class="next">&gt;</td></tr>
+<tr onClick="selectNext(NODE_ID,'radio=radio164', '233.html')"><td>Ogrevanje na drva.</td><td class="next">&gt;</td></tr>
+</table>
+	<span>
+        <button class="withImage" onclick="setPage('start.html')" id="nextButton">
+            <img class="withImage" src="../img/backSvetovanje.svg" alt="&lt; Svetovanje" />
+        </button>
+    </span>
+	<div id="progressBar" style="display:none">
+       <div class="progressText">
+           Prenašam podatke ...
+       </div>
+    </div>
+</body>
+</html>

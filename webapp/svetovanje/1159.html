@@ -1,0 +1,116 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>
+1159
+</title>
+   <meta charset='utf-8'>
+    <link href="../css/moidom_iframe.css" rel="stylesheet">
+    <script charset="UTF-8" src="../js/jquery.min.js"></script>
+    <script charset="UTF-8" src="../common.js"></script>
+    <script charset="UTF-8" src="../iframe.js"></script>
+<script>
+var NODE_ID = 'node1159';
+</script>
+<script>
+function doCalculate()
+{
+var por=parseDecimal($('#por').val());
+var št=parseDecimal($('#št').val());
+var kaz=por/št;
+if (!isNaN(kaz)) {$("#kaz").html (localizeDecimal(kaz));}
+var razred = 'Vaš kazalec učinkovitosti je enak razredu G';
+var nextUrl = '1168.html';
+var tabela=[
+[0,'Vaš kazalec učinkovitosti je enak razredu G','1168.html'],
+[7,'Vaš kazalec učinkovitosti je enak razredu A1','1160.html'],
+[10,'Vaš kazalec učinkovitosti je enak razredu A2','1161.html'],
+[17,'Vaš kazalec učinkovitosti je enak razredu B1','1162.html'],
+[25,'Vaš kazalec učinkovitosti je enak razredu B2','1163.html'],
+[40,'Vaš kazalec učinkovitosti je enak razredu C','1164.html'],
+[70,'Vaš kazalec učinkovitosti je enak razredu D','1165.html'],
+[100,'Vaš kazalec učinkovitosti je enak razredu E','1166.html'],
+[140,'Vaš kazalec učinkovitosti je enak razredu F','1167.html'],
+];
+	for (i=0; i<tabela.length; i++) {
+        if (kaz < tabela[i][0]) {
+            razred = tabela[i][1];
+            nextUrl = tabela[i][2];
+            break;
+        }
+    }
+    $("#evaluation").html (razred);
+    $("#nextButton").attr ('onClick', 'logAndSetPage(NODE_ID, $("form").serialize(),"'+nextUrl+'")');
+    $("#nextButton").attr ('disabled', false);
+    
+}
+
+function updateUserDataPersons()
+{
+    $.ajax({
+        url: DATA_URL + 'user/get_profile',
+        type: 'GET',
+        xhrFields: { withCredentials: true },
+        success: function(data, textStatus, xhr) {
+            $('#št').val(data.persons);
+        }
+    })
+}
+
+function initializePage() {
+    updateButtonsWithImages();
+    updateUserDataPersons();
+}
+</script>
+</head>
+<body onload="initializePage()">
+<h1 id="title">
+Po osebi.
+</h1>
+<p id="text1">
+Izračunajte si kazalec učinkovitosti.
+</p>
+<p id="text2">
+Vrednosti, ki jih še niste vnesli v aplikacijo, vnesite tukaj.
+</p>
+<form>
+<table>
+<tr><td>Poraba vode na leto.</td>
+<td><input type="number" class="narrow" name="por" id="por" onkeyup="doCalculate()" /></td>
+<td>m³/leto</td></tr>
+</table><table>
+<tr><td>Število oseb v gospodinjstvu.</td>
+<td><input type="number" class="narrow" name="št" id="št" onkeyup="doCalculate()" /></td>
+<td>o</td></tr>
+</table><table>
+<tr><td>Kazalec učinkovitosti.</td>
+<td><span id="kaz"></span></td>
+<td>m³/o/leto</td></tr>
+</table><table>
+	<tr>
+    <td>Razred učinkovitosti:</td><td id="evaluation"></td>
+    </tr>
+</table>
+</form>
+	<span>
+        <button class="withImage" onclick="setPage('start.html')" id="nextButton2">
+            <img class="withImage" src="../img/backSvetovanje.svg" alt="&lt; Svetovanje" />
+        </button>
+    </span>
+	<span>
+        <!-- THE 'ONCLICK' ATTRIBUTE BELOW IS PROGRAMMATICALLY UPDATED -->
+        <button class="withImage"
+            onclick="logAndSetPage(NODE_ID, $('form').serialize(),'???.html')" 
+            id="nextButton" disabled>
+            <img class="withImage" src="../img/nextNaprej.svg" alt="Naprej &gt;" />
+        </button>
+    </span>
+	
+    <div id="progressBar" style="display:none">
+       <div class="progressText">
+       Prenašam podatke ...
+       </div>
+    </div>
+</body>
+</html> 
+

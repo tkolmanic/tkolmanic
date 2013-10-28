@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>
+1131
+</title>
+   <meta charset='utf-8'>
+    <link href="../css/moidom_iframe.css" rel="stylesheet">
+    <script charset="UTF-8" src="../js/jquery.min.js"></script>
+    <script charset="UTF-8" src="../common.js"></script>
+    <script charset="UTF-8" src="../iframe.js"></script>
+<script>
+var NODE_ID = 'node1131';
+</script>
+<script>
+function doCalculate()
+{
+var por=parseDecimal($('#por').val());
+var kaz=por;
+if (!isNaN(kaz)) {$("#kaz").html (localizeDecimal(kaz));}
+var razred = 'Vaš kazalec učinkovitosti je enak razredu G';
+var nextUrl = '1140.html';
+var tabela=[
+[0,'Vaš kazalec učinkovitosti je enak razredu G','1140.html'],
+[18,'Vaš kazalec učinkovitosti je enak razredu A1','1132.html'],
+[25,'Vaš kazalec učinkovitosti je enak razredu A2','1133.html'],
+[42,'Vaš kazalec učinkovitosti je enak razredu B1','1134.html'],
+[62,'Vaš kazalec učinkovitosti je enak razredu B2','1135.html'],
+[100,'Vaš kazalec učinkovitosti je enak razredu C','1136.html'],
+[175,'Vaš kazalec učinkovitosti je enak razredu D','1137.html'],
+[250,'Vaš kazalec učinkovitosti je enak razredu E','1138.html'],
+[350,'Vaš kazalec učinkovitosti je enak razredu F','1139.html'],
+];
+	for (i=0; i<tabela.length; i++) {
+        if (kaz < tabela[i][0]) {
+            razred = tabela[i][1];
+            nextUrl = tabela[i][2];
+            break;
+        }
+    }
+    $("#evaluation").html (razred);
+    $("#nextButton").attr ('onClick', 'logAndSetPage(NODE_ID, $("form").serialize(),"'+nextUrl+'")');
+    $("#nextButton").attr ('disabled', false);
+    
+}
+</script>
+</head>
+<body onload="updateButtonsWithImages()">
+<h1 id="title">
+Nominalno.
+</h1>
+<p id="text1">
+Izračunajte si kazalec učinkovitosti.
+</p>
+<p id="text2">
+Vrednosti, ki jih še niste vnesli v aplikacijo, vnesite tukaj.
+</p>
+<form>
+<table>
+<tr><td>Poraba vode na leto.</td>
+<td><input type="number" class="narrow" name="por" id="por" onkeyup="doCalculate()" /></td>
+<td>m³/leto</td></tr>
+</table><table>
+<tr><td>Kazalec učinkovitosti.</td>
+<td><span id="kaz"></span></td>
+<td>m³/leto</td></tr>
+</table><table>
+	<tr>
+    <td>Razred učinkovitosti:</td><td id="evaluation"></td>
+    </tr>
+</table>
+</form>
+	<span>
+        <button class="withImage" onclick="setPage('start.html')" id="nextButton2">
+            <img class="withImage" src="../img/backSvetovanje.svg" alt="&lt; Svetovanje" />
+        </button>
+    </span>
+	<span>
+        <!-- THE 'ONCLICK' ATTRIBUTE BELOW IS PROGRAMMATICALLY UPDATED -->
+        <button class="withImage"
+            onclick="logAndSetPage(NODE_ID, $('form').serialize(),'???.html')" 
+            id="nextButton" disabled>
+            <img class="withImage" src="../img/nextNaprej.svg" alt="Naprej &gt;" />
+        </button>
+    </span>
+	
+    <div id="progressBar" style="display:none">
+       <div class="progressText">
+       Prenašam podatke ...
+       </div>
+    </div>
+</body>
+</html> 
+

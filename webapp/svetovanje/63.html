@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>
+63
+</title>
+    <meta charset='utf-8'>
+    <link href="../css/moidom_iframe.css" rel="stylesheet">
+    <script charset="UTF-8" src="../js/jquery.min.js"></script>
+    <script charset="UTF-8" src="../common.js"></script>
+    <script charset="UTF-8" src="../iframe.js"></script>
+<script>
+var NODE_ID = 'node63';
+</script>
+</head>
+<body onload="updateButtonsWithImages()">
+<h1 id="title">
+Toplota
+</h1>
+<p id="text1">
+Sosed, s katerim mejimo preko stene, ima rad v stanovanju nižjo temperaturo kot mi. Kako bi najbolj ustrezno ravnali?
+</p>
+<p id="text2">
+Označite trditev s klikom.
+</p>
+<table class="selectEvaluate">
+<tr onClick="selectEvaluate(NODE_ID,'radio=radio1', 0)"><td>Pred mejno steno vgradimo radiator in tako preprečimo hladu, da prehaja iz sosedovega stanovanja.</td><td class="next">&gt;</td></tr>
+<tr onClick="selectEvaluate(NODE_ID,'radio=radio2', 1)"><td>Mejno steno izoliramo.</td><td class="next">&gt;</td></tr>
+<tr onClick="selectEvaluate(NODE_ID,'radio=radio3', 0)"><td>Mejno steno prebarvamo s "toplo barvo", na primer z oranžno.</td><td class="next">&gt;</td></tr>
+<tr onClick="selectEvaluate(NODE_ID,'radio=radio4', 0)"><td>Nič ne naredimo, saj toplotne izgube prizadanejo le soseda.</td><td class="next">&gt;</td></tr>
+</table>
+<p></p>
+    <p id="evaluation">Čakam na odgovor.</p>
+
+	<span>
+        <button class="withImage" onclick="setPage('start.html')" id="nextButton2">
+            <img class="withImage" src="../img/backSvetovanje.svg" alt="&lt; Svetovanje" />
+        </button>
+    </span>
+	<span>
+<button class="withImage" onclick="setPage('64.html')" id="nextButton" disabled>
+            <img class="withImage" src="../img/nextNaprej.svg" alt="Naprej &gt;" />
+        </button>
+    </span>
+    <div id="progressBar" style="display:none">
+       <div class="progressText">
+       Prenašam podatke ...
+       </div>
+    </div>
+</body>
+</html>

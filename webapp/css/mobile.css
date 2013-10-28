@@ -1,0 +1,76 @@
+/*
+  changes for mobile environment
+*/
+.mainContent, .mainNav, #mainHeader, .mainWrap, .tab-content {
+    padding: 0px 0px;
+    padding-bottom: 0px;
+    margin: 0;
+}
+.mainWrap {
+    background-image: -ms-linear-gradient(top, #f2f2f2 0%, #f2f2f2 20%, #ffffff 100%);
+    background-image: -moz-linear-gradient(top, #f2f2f2 0%, #f2f2f2 20%, #ffffff 100%);
+    background-image: -o-linear-gradient(top, #f2f2f2 0%, #f2f2f2 20%, #ffffff 100%);
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #f2f2f2), color-stop(1, #ffffff));
+    background-image: -webkit-linear-gradient(top, #f2f2f2 0%, #f2f2f2 20%, #ffffff 100%);
+    background-image: linear-gradient(to bottom, #f2f2f2 0%, #f2f2f2 20%, #ffffff 100%);    
+}
+.tab-content {
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+}
+.tab-content.subMenuContent {
+    padding-left: 0px;
+}
+.subMenu {
+    position: static;
+    top: 0px;
+    margin-top: 0px !important;
+    padding: 5px 5px 0px;
+    background-image: linear-gradient(to bottom, #f2f2f2 0%, #ccc 100%);  
+}
+
+.nav-tabs > .active > a, .nav-tabs > .active > a:hover {
+    background-color: #f2f2f2;
+}
+.nav {
+    margin-bottom: 0px;
+}
+.subMenu > li > a {
+    padding: 5px 5px;
+}
+#mainHeader {
+    height: 0px;
+}
+.mobileCentered {
+    /* by default, nothing; on mobile, centered */
+    text-align: center; 
+}
+.mobileLeftAligned {
+    /* by default, nothing; on mobile, centered */
+    text-align: left; 
+}
+.webOnly {
+     /* when not to be seen, display:none is to be used */
+     display:none;
+}
+.mobileOnly {
+     /* when not to be seen, display:none is to be used */
+     display:inherit;
+}
+.mobileSocialIcons, .mobileLogo {
+	text-align:center;
+}
+.mobilePaddedBelow {
+    padding-bottom: 10px;    
+}
+input, textarea, .uneditable-input {
+    width: 110px;
+}
+input.wide {
+    width: 190px;
+}
+.datepicker {
+    padding-left: 0px;
+ }
+ 

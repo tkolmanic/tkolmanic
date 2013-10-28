@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>
+239
+</title>
+   <meta charset='utf-8'>
+    <link href="../css/moidom_iframe.css" rel="stylesheet">
+    <script charset="UTF-8" src="../js/jquery.min.js"></script>
+    <script charset="UTF-8" src="../common.js"></script>
+    <script charset="UTF-8" src="../iframe.js"></script>
+<script>
+var NODE_ID = 'node239';
+</script>
+</head>
+<body onload="updateButtonsWithImages()">
+<h1 id="title">
+Zemlja-voda
+</h1>
+<p id="text1">
+Toplotne črpalke zemlja-voda, kot vir energije uporabljajo zemljo. Kker ima zemlja tudi dokaj visoko temperaturo, je učinkovitost teh toplotnih črpalk precej visoka. V objektu zasedajo toliko prostora kot povprečen ogrevalni kotel. Lahko so priključene na zemeljski kolektor ali na geosondo. Zemeljski kolektor zahteva večjo površino zemlje, geosonda pa mnogo manj, vendar pa je geosonda dražja za izvedbo. Prosimo izberite vrsto kolektorja. 
+</p>
+<p id="text2">
+Izberite možnost.
+</p>
+<table class="selectNext">
+<tr onClick="selectNext(NODE_ID,'radio=radio206', '241.html')"><td>Zemeljski kolektor.</td><td class="next">&gt;</td></tr>
+<tr onClick="selectNext(NODE_ID,'radio=radio207', '242.html')"><td>Geosonda.</td><td class="next">&gt;</td></tr>
+</table>
+	<span>
+        <button class="withImage" onclick="setPage('start.html')" id="nextButton">
+            <img class="withImage" src="../img/backSvetovanje.svg" alt="&lt; Svetovanje" />
+        </button>
+    </span>
+	<div id="progressBar" style="display:none">
+       <div class="progressText">
+           Prenašam podatke ...
+       </div>
+    </div>
+</body>
+</html>

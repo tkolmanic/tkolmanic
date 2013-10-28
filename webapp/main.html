@@ -1,0 +1,639 @@
+﻿<!DOCTYPE html>
+<html lang="sl">
+    <head>
+        <title>mOIDom</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="css/bootstrap.css" rel="stylesheet">
+        <link href="css/bootstrap-fileupload.min.css" rel="stylesheet">
+        <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+        <link href="css/bootstrap-timepicker.min.css" rel="stylesheet">
+        <link href="css/datepicker.css" rel="stylesheet">
+        <link href="css/moidom.css" rel="stylesheet">
+        
+        <script charset="UTF-8" src="js/jquery.min.js"></script>
+        <script charset="UTF-8" src="js/jquery.cookie.js"></script>
+        <script charset="UTF-8" src="js/jquery.flot.min.js"></script>
+        <script charset="UTF-8" src="js/jquery.flot.time.min.js"></script>
+        <script charset="UTF-8" src="js/jquery.form.js"></script>
+        <script charset="UTF-8" src="js/jquery.validate.js"></script>
+        <script charset="UTF-8" src="js/bootstrap.min.js"></script>
+        <script charset="UTF-8" src="js/bootstrap-datepicker.js"></script>
+        <script charset="UTF-8" src="js/bootstrap-datepicker.sl.js"></script>
+        <script charset="UTF-8" src="js/bootstrap-timepicker.min.js"></script>
+        <script charset="UTF-8" src="js/bootstrap-fileupload.min.js"></script>
+        <script charset="UTF-8" src="js/ocr.js"></script>
+        <!-- <script charset="UTF-8" src="js/cordova_android.js"></script> -->
+        <!--  when creating mobile applications, phonegap.js (cordova_*.js) is automatically included, 
+          see https://build.phonegap.com/docs/preparing-your-app
+          otherwise, it's skipped
+        -->
+        <script charset="UTF-8" src="common.js"></script>
+        <script charset="UTF-8" src="main.js"></script>
+    </head>
+
+    <body onload="onBodyLoad()">
+        <div class="mainWrap">
+            <div id="ios7statusBarPadding" style="padding-top:20px">
+                <!-- IOS7 overlays the status bar with the contents of the window, so
+                some space at the top is added programmatically to avoid overlapping
+                or removed in the other environments  -->
+            </div>
+            <div id="mainHeader">
+                <a href="index.html" class="appLogo webOnly"></a>
+            </div>
+            
+            
+            <div class="mainContent">
+            
+                <ul class="nav nav-tabs mainNav webOnly" id="mainTabs">
+                  <li class="mobileOnly"><a href="#Mobile" id="tabMobile" data-toggle="tab"><img src="img/navMobile.png" alt="Hitro" /><span>Hitro</span></a></li>
+                  <li class="active"><a href="#Submit" id="tabSubmit" data-toggle="tab"><img src="img/navPlus.png" alt="Vnos" /><span>Vnos</span></a></li>
+                  <li><a href="#View" id="tabView" data-toggle="tab"><img src="img/navView.png" alt="Prikaz" /><span>Prikaz</span></a></li>
+                  <li><a href="#Consult" id="tabConsult" data-toggle="tab"><img src="img/navConsult.png" alt="Svetovanje" /><span>Svetovanje</span></a></li>
+                  <li><a href="#Settings" id="tabSettings" data-toggle="tab"><img src="img/navSettings.png" alt="Nastavitve" /><span>Nastavitve</span></a></li>
+                  <li><a href="#Help" id="tabHelp" data-toggle="tab"><img src="img/navHelp.png" alt="Pomoč" /><span>Pomoč</span></a></li>
+                  <li><a href="#Logout" id="tabLogout" data-toggle="tab"><img src="img/navLogout.png" alt="Odjava" /><span>Odjava</span></a></li>
+                </ul>
+                
+                <div class="tab-content">
+                    <div class="tab-pane centered" id="Mobile">
+                        <span id="mobileActions">
+                        <!--
+                        <a class="mobileIcon" onclick="processMobileTopMenuClick('ee','tabSubmit')"><img src="img/mobile/eev.png" title="Elektrika (EUR) vnos"></a>
+                        <a class="mobileIcon" onclick="processMobileTopMenuClick('ee','tabView')"><img src="img/mobile/eep.png" title="Elektrika (EUR) prikaz"></a>
+                        <a class="mobileIcon" onclick="processMobileTopMenuClick('ek','tabSubmit')"><img src="img/mobile/ekv.png" title="Elektrika (količina) vnos"></a>
+                        <a class="mobileIcon" onclick="processMobileTopMenuClick('ek','tabView')"><img src="img/mobile/ekp.png" title="Elektrika (količina) prikaz"></a>
+                        -->
+                        </span>
+                        <a class="mobileIcon" onclick="processMobileTopMenuClick('','tabConsult')"><img src="img/mobile/consult.png" title="Svetovanje"></a>
+                        <a class="mobileIcon" onclick="processMobileTopMenuClick('','tabSettings')"><img src="img/mobile/settings40.png" title="Nastavitve"></a>
+                        <a class="mobileIcon" onclick="processMobileTopMenuClick('','tabHelp')"><img src="img/mobile/help.png" title="Pomoč"></a>
+                    </div>
+                    
+                    <div class="tab-pane active" id="Submit">
+                        <span class="mobileOnly mobileLeftAligned mobilePaddedBelow">
+                            <button class="withImage" onclick="showMobileTopMenu()">
+                                <img class="withImage" src="img/backMoidom.svg" alt="&lt; Moidom" />
+                            </button>
+                        </span>
+                        <ul class="nav nav-tabs subMenu">
+                          <li class="active"><a data-toggle="tab" id="tabSingleSubmit" href="#singleSubmit">Enostaven vnos</a></li>
+                          <li><a data-toggle="tab" id="tabImport" href="#import">Uvoz</a></li>
+                        </ul>
+                        
+                        <div class="tab-content subMenuContent">
+                            <div id="singleSubmit" class="tab-pane active">
+                                <span id="submitUnavailableHint"></span>
+                                <form id="formSubmit">
+                                    <p class="webOnly">Okoljska obremenitev:</p>
+                                    <select name="submitCommodity" id="submitCommodity" onchange="updateSubmitForm()"></select>
+                                    <p>Popravi zadnjega: <input type="checkbox" name="updateExisting" id="updateExisting" onclick="updateSubmitForm()"></input></p>
+                                    <p>Odčitek</p>
+                                    <table>
+                                    <tr>
+                                    <td><span class="webOnly">Datum odčitka:</span>
+                                        <span class="mobileOnly">Datum</span></td>
+                                    <td><span class="datepicker">
+                                        <input type="text" name="submitDate" id="submitDate"
+                                        data-date-format="dd.mm.yyyy" data-date-language="sl" 
+                                        data-date-autoclose="true" >
+                                        </span></td>
+                                    </tr>
+                                    <tr>
+                                    <td><span class="webOnly">Čas odčitka:</span>
+                                        <span class="mobileOnly">Čas</span></td>
+                                    <td><span class="bootstrap-timepicker">
+                                        <input type="time" name="submitTime" id="submitTime" 
+                                        data-template="dropdown" data-show-seconds="true" 
+                                        data-show-meridian="false" data-disable-focus="true"
+                                        data-show-inputs="true" data-minute-step="1" data-second-step="1" >
+                                        </span></td>
+                                    </tr>
+                                    <tr>
+                                    <td><span class="webOnly">Vrednost odčitka:</span>
+                                        <span class="mobileOnly">Vrednost &nbsp;&nbsp;&nbsp;</span></td>
+                                    <td>
+                                        <input type="text" name="submitValue" id="submitValue">
+                                        </td>
+                                    </tr>
+                                    <tr><td></td><td>
+                                        <span id="submitUnit"></span>
+                                        <span id="submitCumulativeText"></span>
+                                        <!--<div id="cameraBtn">
+                                            Vnesi iz računa:
+                                            <button type="button" class="btn" onClick="capturePhoto(); return false;">
+                                                <i class="icon-camera"></i> Fotografiraj
+                                            </button>   
+                                        </div>-->
+                                        </td>
+                                    </tr>
+                                    </table>
+                                    <div class="clearfix"></div>
+                                    <br>
+                                    <input type="submit" value="Vnesi" 
+                                    class="submit btn btn-primary btn-success">
+                                </form>
+                            </div>
+                            <div id="import" class="tab-pane">
+                                <span id="importUnavailableHint"></span>
+                                <form id="formImport" method="post">
+                                    <p class="webOnly">Okoljska obremenitev:</p>
+                                    <select name="commodity" id="importCommodity" onchange=
+                                        "updateCurrentCommodity ($('#importCommodity').val(),true);"></select>
+                                    <br />
+                                    <p class="webOnly">Vrsta datoteke</p>
+                                    <label class="radio"><input type="radio" name="format" id="csvImport" value="csv" checked="true">CSV</label>
+                                    <label class="radio"><input type="radio" name="format" id="fhemImport" value="fhem">FHEM</label>
+                                    <p class="webOnly">Datoteka za uvoz:</p>
+                                    <div class="fileupload fileupload-new" data-provides="fileupload">
+                                        <div class="input-append">
+                                            <div class="uneditable-input span3">
+                                                <i class="icon-file fileupload-exists"></i>
+                                                <span class="fileupload-preview"></span>
+                                            </div>
+                                            <br/>
+                                            <span class="btn btn-file">
+                                                <span class="fileupload-new">Izberite datoteko</span>
+                                                <span class="fileupload-exists">Zamenjaj</span>
+                                                <input type="file" name="file" id="importFile" />
+                                            </span>
+                                            <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Odstrani</a>
+                                        </div>
+                                    </div>
+                                    <br />
+                                    Ime spremenljivke za FHEM
+                                    <input type="text" name="variable" id="fhemVariable">
+                                    <br />
+                                    <input type="submit" value="Uvozi" class="submit btn btn-primary btn-success">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-pane" id="View">
+                        <span id="viewBack" class="mobileOnly mobileLeftAligned mobilePaddedBelow">
+                            <button class="withImage" onclick="showMobileTopMenu()">
+                                <img class="withImage" src="img/backMoidom.svg" alt="&lt; Moidom" />
+                            </button>
+                        </span>
+                        <span id="viewUnavailableHint"></span>
+                        <div id="viewContents">
+                            <form id="viewForm">
+                                <span class="webOnly">Okoljska obremenitev:</span>
+                                <select id="viewCommodity" onchange="updateIndicatorsAndGraph(true)"></select>
+                                <br />
+                                <span class="webOnly">Merska enota kazalca učinkovitosti:</span>
+                                <select id="viewEfficiencyUnit" onchange="updateIndicatorsAndGraph(false)">
+                                    <!--
+                                    <option value="0">nominalno</option>
+                                    <option value="1">po površini</option>
+                                    <option value="2">po osebi</option>
+                                    -->
+                                    <!-- the value "po osebi" is used for most commodities, but some use "po generirani moči"
+                                      depending on commodity's indicator_unit3, see function populateEfficiencyUnit -->
+                                </select>
+                                <br />
+                                <span class="webOnly">Obdobje izračuna kazalca učinkovitosti:</span>
+                                <select id="viewEfficiencyPeriod" onchange="updateIndicatorsAndGraph(false)">
+                                    <option value="0">zadnji vnos</option>
+                                    <option value="1">zadnji mesec</option>
+                                    <option value="2">zadnje leto</option>
+                                </select>
+                                <br />
+                                <span class="mobileOnly">Kazalec:</span>
+                                <span class="webOnly">Kazalec
+                                učinkovitosti za izbrano okoljsko obremenitev, mersko enoto in obdobje izračuna:
+                                <br />
+                                </span>
+                                <!-- all indicators use common prefix 'indicatorValue' -->
+                                <span id="indicatorValueYearly"></span>/leto,
+                                <span id="indicatorValueMonthly"></span>/mesec,
+                                <span id="indicatorValueDaily"></span>/dan.                                 
+                                <div class="clearfix"></div>
+                                <p class="webOnly">Izberite prikaz:</p>
+                            </form>
+
+                            <div id="viewEffClassButton" class="mobileCentered">
+                                <span class="btn btn-primary margin5" onclick="showViewTab(1)">Učinkovitostni razred</span>
+                            </div>
+                            <div id="viewEffClassContent" style="display:none">
+                                <div class="mobileOnly mobileLeftAligned mobilePaddedBelow">
+                                    <button class="withImage" onclick="showMobileTopMenu()">
+                                        <img class="withImage" src="img/backMoidom.svg" alt="&lt; Moidom" />
+                                    </button>
+                                    <button class="withImage" onclick="showViewTab(0);">
+                                        <img class="withImage" src="img/backPrikaz.svg" alt="&lt; Prikaz" />
+                                    </button>
+                                </div>
+                                <div class="webOnly">
+                                    <button class="withImage" onclick="showViewTab(0);">
+                                        <img class="withImage" src="img/backSkrij.svg" alt="&lt; Skrij" />
+                                    </button>
+                                </div>
+                                <div id="commodityViewEffClass">
+                                    <div id="effClassHidden">
+                                        Za izbrano okoljsko obremenitev in mersko enoto kazalca učinkovitosti grafikon ni na voljo.
+                                    </div>
+                                    <div id="effClassShown">
+                                        <span class="webOnly">
+                                            Prikazani so učinkovitostni razredi za izbrano okoljsko obremenitev in mersko enoto kazalca učinkovitosti.
+                                            Letna vrednost kazalca učinkovitosti za izbrano obdobje izračuna je v debeleje obrobljenem razredu.
+                                        </span> 
+                                        <span class="mobileOnly">
+                                            Učinkovitostni razred je debeleje obrobljen.
+                                        </span> 
+                                        <div id="viewEffClassHistogram" style="width:300px;height:150px;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div id="viewPercentileButton" class="mobileCentered">
+                                <span class="btn btn-primary margin5" onclick="showViewTab(2)">Percentil učinkovitosti</span>
+                            </div>
+                            <div id="viewPercentileContent" style="display:none">
+                                <div class="mobileOnly mobileLeftAligned mobilePaddedBelow">
+                                    <button class="withImage" onclick="showMobileTopMenu()">
+                                        <img class="withImage" src="img/backMoidom.svg" alt="&lt; Moidom" />
+                                    </button>
+                                    <button class="withImage" onclick="showViewTab(0);">
+                                        <img class="withImage" src="img/backPrikaz.svg" alt="&lt; Prikaz" />
+                                    </button>
+                                </div>
+                                <div class="webOnly">
+                                    <button class="withImage" onclick="showViewTab(0);">
+                                        <img class="withImage" src="img/backSkrij.svg" alt="&lt; Skrij" />
+                                    </button>
+                                </div>
+                                <div id="commodityViewPercentile">
+                                    <div id="percentileHidden">
+                                        Za izbrano okoljsko obremenitev in mersko enoto kazalca učinkovitosti grafikon ni na voljo.
+                                    </div>
+                                    <div id="percentileShown">
+                                        <span>Označba skupine za prikaz percentilov:</span>
+                                        <select name="viewTag" id="viewTag" onchange="updateIndicatorsAndGraph(false)"></select>
+                                        <br />
+                                        <div id="viewPercentilHistogram" style="width:300px;height:150px;"></div>
+                                        <br />
+                                        Navpična os: število uporabnikov v učinkovitostnem razredu.<br />
+                                        Vodoravna os: vrednost v <span id="percentileUnit"></span>/leto.<br />
+                                        Kazalec učinkovitosti: <span id="indicatorAtPercentile"></span>/leto.<br />
+                                        <span id="userRank"></span>% uporabnikov z vašo označbo skupine je bolj učinkovitih od vas.<br />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="viewTimeseqIncrButton" class="mobileCentered">
+                                <span class="btn btn-primary margin5" onclick="showViewTab(3)">Prirast po obdobjih</span>
+                            </div>
+                            <div id="viewTimeseqIncrContent" style="display:none">
+                                <div class="mobileOnly mobileLeftAligned mobilePaddedBelow">
+                                    <button class="withImage" onclick="showMobileTopMenu()">
+                                        <img class="withImage" src="img/backMoidom.svg" alt="&lt; Moidom" />
+                                    </button>
+                                    <button class="withImage" onclick="showViewTab(0);">
+                                        <img class="withImage" src="img/backPrikaz.svg" alt="&lt; Prikaz" />
+                                    </button>
+                                </div>
+                                <div class="webOnly">
+                                    <button class="withImage" onclick="showViewTab(0);">
+                                        <img class="withImage" src="img/backSkrij.svg" alt="&lt; Skrij" />
+                                    </button>
+                                </div>
+                                <div id="commodityViewTimeseqIncr">
+                                    <div id="viewTimeseqIncr" style="width:300px;height:150px;"></div>
+                                    <br />
+                                    Skupna uporaba: <span id="totalUserValue1"></span>
+                                    <form>
+                                        <input type="button" class="btn submit btn-primary" value="Posreduj prirast po obdobjih" onclick="requestDataEmail(false)" />
+                                    </form>
+                                </div>
+                            </div>
+
+                            <div id="viewTimeseqCumulButton" class="mobileCentered">
+                                <span class="btn btn-primary margin5" onclick="showViewTab(4)">Uporaba kumulativno</span>
+                            </div>
+                            <div id="viewTimeseqCumulContent" style="display:none">
+                                <div class="mobileOnly mobileLeftAligned mobilePaddedBelow">
+                                    <button class="withImage" onclick="showMobileTopMenu()">
+                                        <img class="withImage" src="img/backMoidom.svg" alt="&lt; Moidom" />
+                                    </button>
+                                    <button class="withImage" onclick="showViewTab(0);">
+                                        <img class="withImage" src="img/backPrikaz.svg" alt="&lt; Prikaz" />
+                                    </button>
+                                </div>
+                                <div class="webOnly">
+                                    <button class="withImage" onclick="showViewTab(0);">
+                                        <img class="withImage" src="img/backSkrij.svg" alt="&lt; Skrij" />
+                                    </button>
+                                </div>
+                                <div id="commodityViewTimeseqCumul">
+                                    <div id="viewTimeseqCumul" style="width:300px;height:150px;"></div>
+                                    <br />
+                                    Skupna uporaba: <span id="totalUserValue2"></span>
+                                    <form>
+                                        <input type="button" class="btn submit btn-primary" value="Posreduj uporabo kumulativno" onclick="requestDataEmail(true)" />
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>  <!-- div id="View" -->
+                    
+                    <div class="tab-pane" id="Consult">
+                        <span class="mobileOnly mobileLeftAligned">
+                            <button class="withImage" onclick="showMobileTopMenu()">
+                                <img class="withImage" src="img/backMoidom.svg" alt="&lt; Moidom" />
+                            </button>
+                            <!--<button class="withImage" onclick="restartConsulting()">
+                                <img class="withImage" src="img/backSvetovanje.svg" alt="&lt; Svetovanje" />
+                            </button>-->
+                        </span>
+                        <!--<div class="webOnly">
+                            <form>
+                            <br />
+                            <input type="button" class="btn btn-primary" value="&lt; Začetek svetovanja" onclick="restartConsulting();"></input>
+                            </form>
+                        </div>-->
+                        <div>
+                            <script>
+                            jQuery(document).ready(function() {
+                                var height = $(window).height() - 50;
+                                $('#consultFrame').css('height', height);
+                                $(window).resize(function() {
+                                    var height2 = $(window).height() - 50;
+                                    $('#consultFrame').css('height', height2);
+                               });
+                            });
+                            </script>
+                            <iframe id="consultFrame" src="svetovanje/start.html" width="100%"
+                                style="border: none;"></iframe>
+                        </div>
+                    </div> <!-- div id="Consult" -->                    
+                    
+                    <div class="tab-pane" id="Help">
+                        <span class="mobileOnly mobileLeftAligned">
+                            <button class="withImage" onclick="showMobileTopMenu()">
+                                <img class="withImage" src="img/backMoidom.svg" alt="&lt; Moidom" />
+                            </button>
+                        </span>
+                        <div>
+                            <script>
+                            jQuery(document).ready(function() {
+                                var height = $(window).height() - 50;
+                                $('#helpFrame').css('height', height);
+                                $(window).resize(function() {
+                                    var height2 = $(window).height() - 50;
+                                    $('#helpFrame').css('height', height2);
+                               });
+                            });
+                            </script>
+                            <iframe id="helpFrame" src="pomoc.html" width="100%"
+                                style="border: none;"></iframe>
+                        </div>
+                    </div> <!-- div id="Help" -->                    
+                    
+                    <div id="Settings" class="tab-pane fade">
+                        <span id="settingsBack" class="mobileLeftAligned mobileOnly">
+                            <button class="withImage" onclick="showMobileTopMenu()">
+                                <img class="withImage" src="img/backMoidom.svg" alt="&lt; Moidom" />
+                            </button>
+                        </span>
+                        <ul id="settingsSubMenu" class="nav nav-tabs subMenu">
+                          <li class="active"><a data-toggle="tab" href="#commoditySettings"
+                              onclick="showSettingsTab (1, -2)">Obremenitve</a></li>
+                          <li><a data-toggle="tab" href="#tagSettings"
+                              onclick="showSettingsTab (2, -2)">Označbe</a></li>
+                          <li><a href="#userSettings" data-toggle="tab">Uporabnik</a></li>
+                        </ul>
+                        <div class="tab-content subMenuContent">
+
+                            <div id="commoditySettings" class="tab-pane active">
+                                <div id="commoditySettingsDefault">
+                                    <button id="commoditySettingsAddButton" class="withImage" onclick="showSettingsTab(1,-1)">
+                                        <img class="withImage" src="img/rectPlusDodaj.svg" alt="+ Dodaj" />
+                                    </button>
+                                    <h3 class="webOnly">Seznam obremenitev, za katere lahko vnašate odčitke:</h3>
+                                    <ul id="assignedCommodities" class="assignedSettingList"> </ul>
+                                </div>
+                                <div id="commoditySettingsAdd" style="display:none">
+                                    <div class="mobileOnly mobileLeftAligned mobilePaddedBelow">
+                                        <button class="withImage" onclick="showMobileTopMenu()">
+                                            <img class="withImage" src="img/backMoidom.svg" alt="&lt; Moidom" />
+                                        </button>
+                                    </div>
+                                    <button class="withImage" onclick="showSettingsTab(1,-2);">
+                                        <img class="withImage" src="img/backObremenitve.svg" alt="&lt; Obremenitve" />
+                                    </button>
+                                    <form id="formAssignCommodity">
+                                        <p class="webOnly">Obremenitev:</p>
+                                        <select name="unassignedCommodities" id="unassignedCommodities" onchange="setAssignCommodityDependants()"></select>
+                                        <p class="webOnly">Način vnosa:</p>
+                                        <label class="radio"><input type="radio" name="entryType" id="cumulativeTrue" value="true">Po števcu</label>
+                                        <label class="radio"><input type="radio" name="entryType" id="cumulativeFalse" value="false">Prirast od zadnjega vnosa</label>
+                                        <p class="mobileOnly">Začetna vrednost</p>
+                                        <p class="webOnly">Datum začetne vrednosti:</p>
+                                            <input type="text" name="startDate" id="startDate" data-date-format="dd.mm.yyyy" data-date-language="sl" data-date-autoclose="true" >
+                                        <p class="webOnly">Čas začetne vrednosti:</p>
+                                            <div class="bootstrap-timepicker">
+                                                <input type="text" name="startTime" id="startTime" data-template="dropdown" data-show-seconds="true" data-show-meridian="false" data-disable-focus="true" data-show-inputs="true" data-minute-step="1" data-second-step="1" >
+                                            </div>
+                                        <p class="webOnly">Začetna vrednost:</p>
+                                        <input type="text" name="startValue" id="startValue" class="input-small" value="0"> <span id="assignCommodityUnit"></span><br />
+                                        <div class="clearfix"></div>
+                                        <button class="withImage">
+                                            <img class="withImage" src="img/rectDodaj.svg" alt="Dodaj" />
+                                        </button>
+                                    </form>
+                                </div>
+                                <div id="commoditySettingsEdit">
+                                    <div class="mobileOnly mobileLeftAligned mobilePaddedBelow">
+                                        <button class="withImage" onclick="showMobileTopMenu()">
+                                            <img class="withImage" src="img/backMoidom.svg" alt="&lt; Moidom" />
+                                        </button>
+                                        <button class="withImage" onclick="showSettingsTab(1,-2);">
+                                            <img class="withImage" src="img/backObremenitve.svg" alt="&lt; Obremenitve" />
+                                        </button>
+                                    </div>
+                                    <div class="webOnly">
+                                        <button class="withImage" onclick="showSettingsTab(1,-2);">
+                                            <img class="withImage" src="img/backSkrij.svg" alt="&lt; Skrij" />
+                                        </button>
+                                    </div>
+                                    <p>Obremenitev:
+                                        <span id="commoditySettingsEditCommodity"></span>
+                                    </p>
+                                    <div>
+                                        <!-- the onclick attribute values are set programmatically -->
+                                        <button id="commoditySettingsEditRemove"
+                                            class="withImage" onclick="showMobileTopMenu()">
+                                            <img class="withImage" src="img/rectCrossOdstrani.svg" alt="× Odstrani" />
+                                        </button>
+                                    </div>
+                                    <p>Koda za uvoz:
+                                        <span id="commoditySettingsEditCode"></span>
+                                    </p>
+                                    <p>
+                                        <button id="commoditySettingsEditEnable"
+                                            class="withImage" onclick=" ... programmatically set ... ">
+                                            <img class="withImage" src="img/rectOmogoci.svg" alt="Omogoči uvoz" />
+                                        </button>
+                                        <button id="commoditySettingsEditDisable"
+                                            class="withImage" onclick=" ... programmatically set ... ">
+                                            <img class="withImage" src="img/rectOnemogoci.svg" alt="Onemogoči" />
+                                        </button>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div id="tagSettings" class="tab-pane">
+                                <div id="tagSettingsDefault">
+                                    <button id="tagSettingsAddButton" class="withImage" onclick="showSettingsTab(2,-1)">
+                                        <img class="withImage" src="img/rectPlusDodaj.svg" alt="+ Dodaj" />
+                                    </button>
+                                    <div class="webOnly">
+                                        <h3>Seznam skupin, v katere ste včlanjeni</h3> 
+                                        <p>Na grafikonu s percentili učinkovitosti se lahko
+                                         primerjate s člani iste skupine.</p>
+                                    </div>
+                                    <ul id="assignedTags" class="assignedSettingList"> </ul>
+                                </div>
+                                <div id="tagSettingsAdd" style="display:none">
+                                    <div class="mobileOnly mobileLeftAligned mobilePaddedBelow">
+                                        <button class="withImage" onclick="showMobileTopMenu()">
+                                            <img class="withImage" src="img/backMoidom.svg" alt="&lt; Moidom" />
+                                        </button>
+                                    </div>
+                                    <button class="withImage" onclick="showSettingsTab(2,-2);">
+                                        <img class="withImage" src="img/backOznacbe.svg" alt="&lt; Označbe" />
+                                    </button>
+                                    <form id="formAssignTag">
+                                        <span class="webOnly">Označba skupine:</span>
+                                        <select id="unassignedTags"></select>
+                                        <div class="clearfix"></div>
+                                        <input type="button" class="btn btn-primary" value="Pridruži se"
+                                            onclick="assignTag('unassignedTags');showSettingsTab(2,-2)"></input>
+                                    </form>
+                                </div>
+                                <div id="tagSettingsEdit">
+                                    <div class="mobileOnly mobileLeftAligned mobilePaddedBelow">
+                                        <button class="withImage" onclick="showMobileTopMenu()">
+                                            <img class="withImage" src="img/backMoidom.svg" alt="&lt; Moidom" />
+                                        </button>
+                                        <button class="withImage" onclick="showSettingsTab(2,-2);">
+                                            <img class="withImage" src="img/backOznacbe.svg" alt="&lt; Označbe" />
+                                        </button>
+                                    </div>
+                                    <div class="webOnly">
+                                        <button class="withImage" onclick="showSettingsTab(2,-2);">
+                                            <img class="withImage" src="img/backSkrij.svg" alt="&lt; Skrij" />
+                                        </button>
+                                    </div>
+                                    <p>Označba:
+                                        <span id="tagSettingsEditTag"></span>
+                                    </p>
+                                    <div>
+                                        <!-- the onclick attribute values are set programmatically -->
+                                        <button id="tagSettingsEditRemove"
+                                            class="withImage" onclick="showMobileTopMenu()">
+                                            <img class="withImage" src="img/rectCrossOdstrani.svg" alt="× Odstrani" />
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                            </div>
+
+                            <div id="userSettings" class="tab-pane fade">
+                                <strong>Podatki uporabnika:</strong>
+                                <form id="formUserSettings">
+                                    <p>Elektronski naslov:
+                                    <span id="updateUserEmail"></span>
+                                    </p>                                    
+                                    <label>Geslo (če je polje prazno, ostane geslo nespremenjeno):</label>
+                                    <input type="password" name="password" id="password" class="span8">
+                                    <label>Potrdi geslo:</label>
+                                    <input type="password" name="confPassword" id="confPassword" class="span8">
+                                    
+                                    <!-- Appartment data -->
+                                    <label></label>
+                                    <strong>Podatki o stanovanju:</strong>
+                                    <label>Polja, označena z *, so obvezna.</label>
+                                    <label>* Površina stanovanja (m2, celo število):</label>
+                                    <input type="number" id="area" name="area" class="input-medium">
+                                    <label>* Število članov gospodinjstva:</label>
+                                    <input type="number" id="persons" name="persons" class="input-medium">
+                                    <label>Priključna moč električnega priključka (kW, celo število):</label>
+                                    <input type="number" id="in_power" name="in_power" class="input-medium">
+                                    <label>Poštna številka kraja bivanja:</label>
+                                    <input type="number" id="postal_code" name="postal_code" class="input-medium">
+                                    <label>Doma generirana moč (kW, decimalno število, decimalka je vejica ali pika):</label>
+                                    <input type="text" id="out_power" name="out_power" class="input-medium">
+                                    <div class="clearfix"></div>
+                                    <!-- Buttons -->
+                                    <input type="submit" value="Potrdi" class="submit btn btn-primary btn-success">
+                                </form>
+                            </div>
+                        </div>
+                    </div> <!-- Settings -->
+                    
+                    <div class="tab-pane fade webOnly" id="Logout">
+                        <form>
+                        <br />
+                        <input type="button" class="btn btn-primary" value="Potrdi odjavo" onclick="logout()"></input>
+                        </form>
+                    </div>
+                    
+                    
+                </div>
+            
+            </div>
+            
+            <div id="appFooter" class="webOnly">
+                <div class="center">
+                    <span>© 2013 mOIDom | Vse pravice pridržane.</span>
+                    <div class="socialIcons">
+                        <span>Sledite nam na </span>
+                        <a href="https://www.facebook.com/pages/Moidom/371804792918719?fref=ts" target="_blank" class="facebook"></a>
+                        <a href="https://twitter.com/moidom_si" target="_blank" class="twitter"></a>
+                    </div>
+                </div>
+            </div>
+        </div>  
+        
+        
+        <div id="confirmDialog" class="modal hide fade">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3 id="confirmDialogTitle">confirmDialogTitle</h3>
+            </div>
+            <div class="modal-body">
+                <p id="confirmDialogBody">confirmDialogBody</p>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn" id="confirmDialogButton" onclick="">Da</a>
+                <a href="#" class="btn btn-primary" onclick="$('#confirmDialog').modal('hide')">Ne</a>
+            </div>
+        </div>
+		
+		<div id="retryDialog" class="modal hide fade">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3 id="confirmDialogTitle">Strežnik ni dosegljiv</h3>
+            </div>
+            <div class="modal-body">
+                <p id="confirmDialogBody">Povezava s strežnikom žal ni možna. Prosimo omogočite povezavo.</p>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-primary" onclick="$('#confirmDialog').modal('hide')">Poskusi ponovno</a>
+            </div>
+        </div>
+        
+        <div id="canvasContainer">
+            <canvas id="canvas"></canvas>
+            <button class="btn btn-large canvas-btn" onclick="switchVisibleContainer()">Nazaj</button>  
+            <button class="btn btn-large canvas-btn" onClick="capturePhoto()"><i class="icon-camera"></i> Slikaj</button>
+        </div>
+        
+        
+    </body>
+</html>

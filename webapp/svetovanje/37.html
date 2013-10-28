@@ -1,0 +1,109 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>
+37
+</title>
+	<meta charset='utf-8'>
+    <link href="../css/moidom_iframe.css" rel="stylesheet">
+    <script charset="UTF-8" src="../js/jquery.min.js"></script>
+    <script charset="UTF-8" src="../common.js"></script>
+    <script charset="UTF-8" src="../iframe.js"></script>
+    <script>var NODE_ID = 'node37';</script>
+<script>
+function doCalculate()
+{
+var c=4200;
+var m=parseDecimal($('#m').val());
+var st=parseDecimal($('#st').val());
+var por=c*m*st/3600;
+var cena=parseDecimal($('#cena').val());
+var stro=por*cena;
+c= Math.round(c * 100) / 100;
+$("#c").html (localizeDecimal(c));
+if (isNaN(c)) {$("#c").html ('(popravi vnos)');}
+por= Math.round(por * 100) / 100;
+$("#por").html (localizeDecimal(por));
+if (isNaN(por)) {$("#por").html ('(popravi vnos)');}
+stro= Math.round(stro * 100) / 100;
+$("#stro").html (localizeDecimal(stro));
+if (isNaN(stro)) {$("#stro").html ('(popravi vnos)');}
+var predvid=parseDecimal($('#predvid').val());
+x=predvid/stro*100;
+var xx = Math.abs (x-100);
+    var innerHtml = '';
+    if (xx<=20) {
+        innerHtml='<span style="background:#6f6">Odlično.</span>';
+    } else if (xx <= 50) {
+        innerHtml='<span style="background:#f90">Dobro.</span>';
+    } else if (!isNaN(xx)) {
+        innerHtml='<span style="background:#f66">Slabo.</span>';
+    }
+    $("#evaluation").html (innerHtml);
+    $("#nextButton").attr ('disabled', false);
+}
+</script>
+</head>
+<body onload="updateButtonsWithImages()">
+<h1 id="title">
+Elektrika
+</h1>
+<p id="text1">
+Koliko električne energije potroši vodni grelec, da segreje 1 liter vode, če uporabljamo vodni grelec samo v tarifi ET?
+</p>
+<p id="text2">
+Da se rezultat 
+izračuna samodejno, v obrazec dopolnite podatke, ki jih niste vpisali v aplikacijo mOIDom. 
+</p>
+<form>
+<table>
+<tr><td>Predvidi, kolikšen je strošek električne energije vodnega grelca na leto.</td>
+<td><input type="number" class="narrow" name="predvid" id="predvid" onkeyup="doCalculate()" /></td>
+<td>EUR</td></tr>
+</table>
+<table>
+<tr><td>Specifična toplota vode</td>
+<td><span id="c"></span> </td>
+<td>J/kgK</td></tr>
+<tr><td>Masa vode (1 L = 1kg)</td>
+<td><input type="number" class="narrow" name="m" id="m" onkeyup="doCalculate()" /></td>
+<td>kg</td></tr>
+<tr><td>Za koliko kelvinov želimo segreti vodo</td>
+<td><input type="number" class="narrow" name="st" id="st" onkeyup="doCalculate()" /></td>
+<td>K</td></tr>
+<tr><td>Poraba električne energije za segrevanje vode na leto</td>
+<td><span id="por"></span> </td>
+<td>kWh</td></tr>
+<tr><td>Cena elektrike: enotarifni ET</td>
+<td><input type="number" class="narrow" name="cena" id="cena" onkeyup="doCalculate()" /></td>
+<td>EUR/kWh</td></tr>
+<tr><td>Strošek segrevanja vode na leto</td>
+<td><span id="stro"></span> </td>
+<td>EUR</td></tr>
+</table>
+
+<div id="evaluation1"></div>
+<div id="text4">Vaše predvidevanje je bilo: <span id="evaluation">
+</span></div>
+
+</form>
+	<span>
+        <button class="withImage" onclick="setPage('start.html')" id="nextButton2">
+            <img class="withImage" src="../img/backSvetovanje.svg" alt="&lt; Svetovanje" />
+        </button>
+    </span>
+    <span>
+        <button class="withImage"
+            onclick="logAndSetPage(NODE_ID, $('form').serialize(),'40.html')" id="nextButton" disabled>
+            <img class="withImage" src="../img/nextNaprej.svg" alt="Naprej &gt;" />
+        </button>
+    </span>
+	
+
+    <div id="progressBar" style="display:none">
+       <div class="progressText">
+       Prenašam podatke ...
+       </div>
+    </div>
+</body>
+</html>

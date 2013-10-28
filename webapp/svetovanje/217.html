@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>
+217
+</title>
+   <meta charset='utf-8'>
+    <link href="../css/moidom_iframe.css" rel="stylesheet">
+    <script charset="UTF-8" src="../js/jquery.min.js"></script>
+    <script charset="UTF-8" src="../common.js"></script>
+    <script charset="UTF-8" src="../iframe.js"></script>
+<script>
+var NODE_ID = 'node217';
+</script>
+</head>
+<body onload="updateButtonsWithImages()">
+<h1 id="title">
+Lesna biomasa novo
+</h1>
+<p id="text1">
+Za namestitev sistema ogrevanja z lesno biomaso morate najprej preveriti ali imate prostorske in logistične možnosti za izrabo tega energenta. Torej ali ima vaša zgradba prostor z dimnikom ali z možnostjo namestitve dimnika. Ta prostor je dovolj velik za  kotel in zalogovnike goriva ter toplote in ima tudi možnost dostopa za dobavo goriva. Zato ugotavljam, da:
+</p>
+<p id="text2">
+Izberite možnost.
+</p>
+<table class="selectNext">
+<tr onClick="selectNext(NODE_ID,'radio=radio83', '230.html')"><td>Imam možnost namestitve sistema ogrevanja z lesno biomaso.</td><td class="next">&gt;</td></tr>
+<tr onClick="selectNext(NODE_ID,'radio=radio84', '212.html')"><td>Nimam možnosti uporabe tega sistema ogrevanja in bom šel nazaj na izbiro energenta.</td><td class="next">&gt;</td></tr>
+</table>
+	<span>
+        <button class="withImage" onclick="setPage('start.html')" id="nextButton">
+            <img class="withImage" src="../img/backSvetovanje.svg" alt="&lt; Svetovanje" />
+        </button>
+    </span>
+	<div id="progressBar" style="display:none">
+       <div class="progressText">
+           Prenašam podatke ...
+       </div>
+    </div>
+</body>
+</html>

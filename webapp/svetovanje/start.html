@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>
+start
+</title>
+   <meta charset='utf-8'>
+    <link href="../css/moidom_iframe.css" rel="stylesheet">
+    <script charset="UTF-8" src="../js/jquery.min.js"></script>
+    <script charset="UTF-8" src="../common.js"></script>
+    <script charset="UTF-8" src="../iframe.js"></script>
+<script>
+var NODE_ID = 'nodestart';
+</script>
+</head>
+<body onload="updateButtonsWithImages()">
+<h1 id="title">
+Okoljsko svetovanje
+</h1>
+<p id="text1">
+Za katero področje vas zanima okoljsko svetovanje?
+</p>
+<p id="text2">
+Izberite možnost.
+</p>
+<table class="selectNext">
+<tr onClick="selectNext(NODE_ID,'radio=radio4', '201.html')"><td>Ogrevanje</td><td class="next">&gt;</td></tr>
+<tr onClick="selectNext(NODE_ID,'radio=radio5', '301.html')"><td>Električna energija</td><td class="next">&gt;</td></tr>
+<tr onClick="selectNext(NODE_ID,'radio=radio6', '401.html')"><td>Voda</td><td class="next">&gt;</td></tr>
+<tr onClick="selectNext(NODE_ID,'radio=radio7', '501.html')"><td>Odpadki</td><td class="next">&gt;</td></tr>
+<tr onClick="selectNext(NODE_ID,'radio=radio8', '700.html')"><td>Izračun mojih energetskih kazalcev</td><td class="next">&gt;</td></tr>
+<tr onClick="selectNext(NODE_ID,'radio=radio9', 'startizo.html')"><td>Izobraževalne naloge</td><td class="next">&gt;</td></tr>
+</table>
+	
+	<div id="progressBar" style="display:none">
+       <div class="progressText">
+           Prenašam podatke ...
+       </div>
+    </div>
+</body>
+</html>
