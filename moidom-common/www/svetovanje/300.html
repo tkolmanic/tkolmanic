@@ -1,0 +1,120 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>
+300
+</title>
+<meta charset='utf-8'>
+<link href="../css/moidom_iframe.css" rel="stylesheet">
+<script charset="UTF-8" src="../js/jquery.min.js"></script>
+<script charset="UTF-8" src="../common.js"></script>
+<script>
+var NODE_ID = 'node300';
+var APPLICATION_ID = 1;
+var TIMEOUT = 1000;
+var DATA_URL = getDataUrl(); // in common.js
+
+function loadNext()
+{
+window.location = "301.html"
+}
+function updateForm()
+{
+var st40=parseFloat(document.getElementById("st40").value); 
+var st60=parseFloat(document.getElementById("st60").value); 
+var st75=parseFloat(document.getElementById("st75").value); 
+var st100=parseFloat(document.getElementById("st100").value); 
+var pr_dan=parseFloat(document.getElementById("pr_dan").value); 
+var pr_mesec=parseFloat(document.getElementById("pr_mesec").value); 
+var pr_leto=parseFloat(document.getElementById("pr_leto").value); 
+pr_dan=(2*(40*st40+60*st60+75*st75+100*st100)-2*(9*st40+11*st60+18*st75+20*st100))/1000;
+pr_mesec=(2*(40*st40+60*st60+75*st75+100*st100)-2*(9*st40+11*st60+18*st75+20*st100))/1000*30;
+pr_leto=(2*(40*st40+60*st60+75*st75+100*st100)-2*(9*st40+11*st60+18*st75+20*st100))/1000*365;
+if (!isNaN(st40))
+document.getElementById("st40").value=st40;
+if (!isNaN(st60))
+document.getElementById("st60").value=st60;
+if (!isNaN(st75))
+document.getElementById("st75").value=st75;
+if (!isNaN(st100))
+document.getElementById("st100").value=st100;
+if (!isNaN(pr_dan))
+document.getElementById("pr_dan").value=pr_dan;
+if (!isNaN(pr_mesec))
+document.getElementById("pr_mesec").value=pr_mesec;
+if (!isNaN(pr_leto))
+document.getElementById("pr_leto").value=pr_leto;
+}
+
+$(document).ready(function() {
+    $('form').submit(function() {
+        $.ajax({
+            url: DATA_URL + 'consult/log',
+            type: 'GET',
+            data: {
+                node: NODE_ID,
+                params: $('form').serialize(),
+                application: APPLICATION_ID
+            },
+            xhrFields: { withCredentials: true },
+            async: true,
+            cache: false,
+            timeout: TIMEOUT,
+            beforeSend: function(xhr, options) { $('#progressbar').show(); }
+        })
+        .always(function () {
+            $('#progressbar').hide();
+            loadNext();
+        });
+        return false;
+    });
+
+    $('#progressbar').hide();
+});
+</script>
+</head>
+<body>
+
+<h1 id="title">
+Elektrika: osvetlitev
+</h1>
+<p id="text1">
+Poraba elektrike je odvisna tudi od varčnosti osvetlitve. Najbolj privarčujete, če imate vse žarnice v svetilih varčne. Koliko svetil imate opremljenih z starimi nevarčnimi žarnicami in kako močne so le te? Izvedeli boste koliko lahko privarčujete, če vaše nevarčne žarnice (40W, 60W, 75W in 100W) zamenjate z varčnimi (9W, 11W, 18Win 20W).
+</p>
+<p id="text2">
+Vpišite število svetil, ki jih imate s posamezno močjo žarnice.
+</p>
+<form>
+<table>
+<tr><td id="st40Name">Število 40W žarnic:</td>
+<td><input type="text" name="st40" id="st40" value="" onKeyUp="updateForm()"/></td>
+<td id="st40Unit"></td>
+<tr><td id="st60Name">Število 60W žarnic:</td>
+<td><input type="text" name="st60" id="st60" value="" onKeyUp="updateForm()"/></td>
+<td id="st60Unit"></td>
+<tr><td id="st75Name">Število 75W žarnic:</td>
+<td><input type="text" name="st75" id="st75" value="" onKeyUp="updateForm()"/></td>
+<td id="st75Unit"></td>
+<tr><td id="st100Name">Število 100W žarnic:</td>
+<td><input type="text" name="st100" id="st100" value="" onKeyUp="updateForm()"/></td>
+<td id="st100Unit"></td>
+<tr><td id="pr_danName">Možen prihranek pri osvetlitvi/dan</td>
+<td><input type="text" name="pr_dan" id="pr_dan" disabled="" value="" onKeyUp="updateForm()"/></td>
+<td id="pr_danUnit">kWh</td>
+<tr><td id="pr_mesecName">Možen prihranek pri osvetlitvi/mesec</td>
+<td><input type="text" name="pr_mesec" id="pr_mesec" disabled="" value="" onKeyUp="updateForm()"/></td>
+<td id="pr_mesecUnit">kWh</td>
+<tr><td id="pr_letoName">Možen prihranek pri osvetlitvi/leto</td>
+<td><input type="text" name="pr_leto" id="pr_leto" disabled="" value="" onKeyUp="updateForm()"/></td>
+<td id="pr_letoUnit">kWh</td>
+</table>
+<button type="submit" id="button">Naprej</button>
+</form>
+<div id="progressbar">
+   <div class="progressTxt">
+   Beležim podatke ...
+   </div>
+</div>
+</body>
+</html> 
+

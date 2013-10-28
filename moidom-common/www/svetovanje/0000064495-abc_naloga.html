@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type"CONTENT="text/html; charset=windows-1250">
+<script>
+function loadNext()
+{
+if (document.getElementById("radio106").checked==true)
+window.location = "100.html";
+if (document.getElementById("radio107").checked==true)
+window.location = "101.html";
+if (document.getElementById("radio108").checked==true)
+window.location = "100.html";
+}
+function updateForm()
+{
+var correct=true;
+if (document.getElementById("radio106").checked!=false) {
+   correct=false;
+}
+if (document.getElementById("radio107").checked!=true) {
+   correct=false;
+}
+if (document.getElementById("radio108").checked!=false) {
+   correct=false;
+}
+if (correct==true) {
+   document.getElementById("evaluation").innerHTML="pravilen";
+   document.getElementById("evaluation").style.backgroundColor="rgb(100,255,100)";
+}
+else {
+   document.getElementById("evaluation").innerHTML="napačen";
+   document.getElementById("evaluation").style.backgroundColor="rgb(255,100,100)";
+}
+}
+</script>
+</head>
+<body>
+<h1 id="title">
+Odpadki: Ravnanje s kuhinjskimi odpadki.
+</h1>
+<p id="text1">Kuhinjske odpadke je dovoljeno rezati, drobiti ali mleti ter redčiti z namenom, da se z odpadno vodo odvajajo v javno kanalizacijo ali greznice? (Več o tem: Uredba o ravnanju z biološko razgradljivimi kuhinjskimi odpadki in zelenim vrtnim odpadom; http://www.uradni-list.si/1/content?id=97775)
+</p>
+<p id="text2">Označite trditev s klikom.
+</p>
+<form>
+<table>
+<tr><td><input type="radio"name="radio"id="radio106"value="radio106"onChange="updateForm()">Da</input><td></tr>
+<tr><td><input type="radio"name="radio"id="radio107"value="radio107"onChange="updateForm()">Ne</input><td></tr>
+<tr><td><input type="radio"name="radio"id="radio108"value="radio108"onChange="updateForm()">Ne vem</input><td></tr>
+<tr>
+<td> Vaš odgovor je </td>
+<td id="evaluation"> nepopoln. </td>
+</tr>
+</table>
+<button type="button"id="button"onclick="loadNext()">Naprej</button>
+</form>
+</body>
+</html>

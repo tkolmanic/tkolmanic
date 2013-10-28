@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type"CONTENT="text/html; charset=windows-1250">
+<script>
+function loadNext()
+{
+  window.location = "5.html";
+}
+function updateForm()
+{
+var var1=parseFloat(document.getElementById("var1").value);
+var var2=parseFloat(document.getElementById("var2").value);
+var var3=parseFloat(document.getElementById("var3").value);
+var3=var2/(var1+var2)*100;
+if (!isNaN(var1))
+document.getElementById("var1").value=var1;
+if (!isNaN(var2))
+document.getElementById("var2").value=var2;
+if (!isNaN(var3))
+document.getElementById("var3").value=var3;
+}
+</script>
+</head>
+<body>
+
+<h1 id="title">Elektrika: osvetlitev</h1>
+<p id="text">Poraba elektrike je odvisna tudi od varčnosti osvetlitve. Najbolj privarčujete, če imate vse žarnice v svetilih varčne. Koliko svetil imate opremljenih z varčnimi in koliko z nevarčnimi žarnicami?</p>
+<p id="text2">Vpišite število svetil z varčnimi in nevarčnimi žarnicami</p>
+<form>
+<table>
+<tr>
+<td id="var1Name">Število varčnih žarnic:</td>
+<td> <input type="text" name="var1" id="var1" value="" onKeyup="updateForm()"/> </td>
+<td id="var1Unit"></td>
+</tr>
+<tr>
+<td id="var2Name">Število nevarčnih žarnic:</td>
+<td> <input type="text" name="var2" id="var2" value="" onKeyup="updateForm()"/> </td>
+<td id="var2Unit"></td>
+</tr>
+<tr>
+<td id="var3Name">Možen prihranek pri osvetlitvi:</td>
+<td> <input type="text" name="var3" id="var3" disabled="" value="" onKeyup="updateForm()"/> </td>
+<td id="var3Unit">%</td>
+</tr>
+</table>
+<button type="button" id="button" onclick="loadNext()">Naprej</button>
+</form>
+</body>
+</html> 
+
